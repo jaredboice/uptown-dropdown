@@ -18,7 +18,7 @@
 
 _importing the commonly needed classes_
 ```javascript  
-import UptownDropdown from 'list-runner';
+import UptownDropdown from 'uptown-dropdown';
 
 ```
 _instantiation: dropdown_

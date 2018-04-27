@@ -18,7 +18,7 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 
 _importing the commonly needed classes_
 ```javascript  
-import UptownDropdown from 'list-runner';
+import UptownDropdown from 'uptown-dropdown';
 
 ```
 _instantiation example: dropdown_
