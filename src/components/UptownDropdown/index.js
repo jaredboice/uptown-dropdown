@@ -43,7 +43,7 @@ class UptownDropdown extends React.Component {
         this.state = {
             expanded
         };
-        this.renderCount = 0; // see "note on calculateHeight" (in componentDidUpdate) and "note on forceCalculateHeight"
+        this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateHeight"
         this.forceCalculateHeight = false; // see "note on forceCalculateHeight"
         this.handleExpand = this.handleExpand.bind(this);
         this.validateClick = this.validateClick.bind(this);
@@ -73,8 +73,8 @@ class UptownDropdown extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // note on calculateHeight
-        this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateHeight is true)
+        // note on calculateDimension
+        this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
         const { flexBasis, maxWidth, border, borderRadius, boxShadow } = this.props;
         let quickStarterPresets;
         if (
@@ -91,9 +91,9 @@ class UptownDropdown extends React.Component {
     }
 
     componentDidUpdate() {
-        // note on calculateHeight
+        // note on calculateDimension
         if (this.renderCount === 1) {
-            // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateHeight is true)
+            // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
             this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
         }
     }
@@ -225,7 +225,7 @@ class UptownDropdown extends React.Component {
             animeStateClass = anime;
         }
         // eslint-disable-next-line eqeqeq
-        if (this.props.calculateHeight && (anime != false && anime != 'no-anime')) {
+        if (this.props.calculateDimension && (anime != false && anime != 'no-anime')) {
             adjustedBodyInlineStyles = expanded
                 ? { ...adjustedBodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
                 : { ...adjustedBodyInlineStyles, maxHeight: 0 };
@@ -277,8 +277,8 @@ class UptownDropdown extends React.Component {
 
         /*
             note on forceCalculateHeight:
-                the forceCalculateHeight switch is set to true when => the body starts off as expanded while props for anime and calculateHeight are also true.
-                in this scenario, the very first click event on the header would not trigger the calculateHeight value required for the animation (but it will for any following click event).
+                the forceCalculateHeight switch is set to true when => the body starts off as expanded while props for anime and calculateDimension are also true.
+                in this scenario, the very first click event on the header would not trigger the calculateDimension value required for the animation (but it will for any following click event).
                 this anomaly is resolved by forcing react to update and re-render this one time. so when renderCount === 1 (and all the preceding conditions are met),
                 the component has mounted and we need to force the height calculation. when it is greater than 1, then we are in any other subsequent render and there is
                 no longer a need to force the height calculation
@@ -340,7 +340,7 @@ UptownDropdown.propTypes = {
     placeholder: PropTypes.string,
     centerPlaceholder: PropTypes.bool,
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    calculateHeight: PropTypes.bool,
+    calculateDimension: PropTypes.bool,
     flexBasis: PropTypes.string,
     maxWidth: PropTypes.string,
     border: PropTypes.string,
@@ -364,7 +364,7 @@ UptownDropdown.defaultProps = {
     placeholder: 'select',
     centerPlaceholder: false,
     anime: false,
-    calculateHeight: false,
+    calculateDimension: false,
     flexBasis: null,
     maxWidth: null,
     border: null,
