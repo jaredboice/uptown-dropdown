@@ -43,8 +43,8 @@ class UptownDropdown extends React.Component {
         this.state = {
             expanded
         };
-        this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateHeight"
-        this.forceCalculateHeight = false; // see "note on forceCalculateHeight"
+        this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateDimension"
+        this.forceCalculateDimension = false; // see "note on forceCalculateDimension"
         this.handleExpand = this.handleExpand.bind(this);
         this.validateClick = this.validateClick.bind(this);
         this.mouseOverHeader = null;
@@ -229,7 +229,7 @@ class UptownDropdown extends React.Component {
             adjustedBodyInlineStyles = expanded
                 ? { ...adjustedBodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
                 : { ...adjustedBodyInlineStyles, maxHeight: 0 };
-            this.forceCalculateHeight = true;
+            this.forceCalculateDimension = true;
         }
         // class list integration
         const headerClassList = `${disabledStateClass} ${headerExpandedStateClass}`;
@@ -276,8 +276,8 @@ class UptownDropdown extends React.Component {
         /* eslint-disable */
 
         /*
-            note on forceCalculateHeight:
-                the forceCalculateHeight switch is set to true when => the body starts off as expanded while props for anime and calculateDimension are also true.
+            note on forceCalculateDimension:
+                the forceCalculateDimension switch is set to true when => the body starts off as expanded while props for anime and calculateDimension are also true.
                 in this scenario, the very first click event on the header would not trigger the calculateDimension value required for the animation (but it will for any following click event).
                 this anomaly is resolved by forcing react to update and re-render this one time. so when renderCount === 1 (and all the preceding conditions are met),
                 the component has mounted and we need to force the height calculation. when it is greater than 1, then we are in any other subsequent render and there is
@@ -286,7 +286,7 @@ class UptownDropdown extends React.Component {
 
         /* eslint-enable */
         this.renderCount++;
-        if (this.renderCount === 1 && this.forceCalculateHeight) {
+        if (this.renderCount === 1 && this.forceCalculateDimension) {
             this.forceUpdate();
         }
         return (
