@@ -6,7 +6,7 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 
 ## Description
 
-**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, and the expansion state is passed as a parameter to the click handler and to the optional header/icon components when provided.
+**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the expandable body which decouples the dropdown from a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, the ability to pass custom props to custom components, and parameter injection of the expansion state to the click handler and to optional header/icon components as a key/value of props.
 
 ## Install, Import & Instantiate
 
@@ -21,7 +21,7 @@ _importing the commonly needed classes_
 import UptownDropdown from 'uptown-dropdown';
 
 ```
-_instantiation example: dropdown_
+**Instantiation Example: Dropdown**
 
 ```javascript
 // the message prop will be passed along via bodyCompProps = { message: 'hello world'}
@@ -69,7 +69,7 @@ render(){
 }
 ```
 
-_instantiation example: expander_
+**Instantiation Example: Expander**
 
 ```javascript
     return (
@@ -97,7 +97,7 @@ _instantiation example: expander_
 }
 ```
 
-_props_
+**Props**
 
 ```javascript
 UptownDropdown.propTypes = {
