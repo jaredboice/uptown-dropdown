@@ -1,1 +1,1 @@
-export { default as UptownDropdown } from './components/UptownDropdown';
+export { UptownDropdown as default } from './components/UptownDropdown';

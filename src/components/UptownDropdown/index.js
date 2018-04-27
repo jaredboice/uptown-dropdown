@@ -381,4 +381,4 @@ UptownDropdown.defaultProps = {
     mouseOutCollapseDelay: MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
 };
 
-export default UptownDropdown;
+export { UptownDropdown };
