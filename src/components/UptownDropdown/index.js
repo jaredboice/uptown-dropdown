@@ -1,4 +1,4 @@
-import React from 'react'; // TODO: add box-shadow and then review default propTypes again
+import React from 'react';
 import PropTypes from 'prop-types';
 import './dropdownStyles.css';
 import './expanderStyles.css';
@@ -93,7 +93,7 @@ class UptownDropdown extends React.Component {
     componentDidUpdate() {
         // note on calculateDimension
         if (this.renderCount === 1) {
-            // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
+            // when renderCount === 1 then the DOM has mounted the new body and we can calculate its dimension for animation purposes (for when props.calculateDimension is true)
             this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
         }
     }
@@ -280,8 +280,8 @@ class UptownDropdown extends React.Component {
                 the forceCalculateDimension switch is set to true when => the body starts off as expanded while props for anime and calculateDimension are also true.
                 in this scenario, the very first click event on the header would not trigger the calculateDimension value required for the animation (but it will for any following click event).
                 this anomaly is resolved by forcing react to update and re-render this one time. so when renderCount === 1 (and all the preceding conditions are met),
-                the component has mounted and we need to force the height calculation. when it is greater than 1, then we are in any other subsequent render and there is
-                no longer a need to force the height calculation
+                the component has mounted and we need to force the dimension calculation. when it is greater than 1, then we are in any other subsequent render and there is
+                no longer a need to force the dimension calculation
         */
 
         /* eslint-enable */
