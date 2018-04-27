@@ -6,7 +6,7 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 
 ## Description
 
-**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list and opens the door for components that do not apply a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, and the expansion state is passed as a parameter to the click handler and to the optional header/icon components when provided.
+**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, and the expansion state is passed as a parameter to the click handler and to the optional header/icon components when provided.
 
 ## Install, Import & Instantiate
 
