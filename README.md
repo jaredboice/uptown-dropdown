@@ -273,7 +273,7 @@ section.uptown-dropdown .__uptown-dropdown-collapse.__no-anime {
 }
 ```
 
-## Expander CSS
+**expander css**
 
 ```css
 section.uptown-expander {
