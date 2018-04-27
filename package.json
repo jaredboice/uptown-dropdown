@@ -28,7 +28,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "lint": "eslint '**/*.{js,jsx}' --quiet",
-    "build-js": "babel src -d build",
+    "build-js": "babel src -d build --copy-files",
     "build": "npm run clean && npm run build-js",
     "copy-packagejs-for-publish": "yes | cp -rf ./package.json ./build/package.json",
     "copy-readme-for-publish": "yes | cp -rf ./README.md ./build/README.md",
