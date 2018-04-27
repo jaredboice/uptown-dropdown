@@ -214,7 +214,7 @@ section.uptown-dropdown header span.__uptown-dropdown-icon {
 
 _note_: to apply the types of css modifications above to componentType = "expander", simply replace all the instances of "dropdown" in the class lists with "expander"
 
-## CSS Files
+## CSS & JSX
 
 **dropdown css**
 
