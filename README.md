@@ -160,11 +160,11 @@ UptownDropdown.defaultProps = {
 **icon**
 + `__uptown-${componentType}-icon`
 
-**disabledStateClass** _applied on the header_
+**disabledStateClass** _(applied on the header)_
 + '__uptown-disabled'
 + '__uptown-enabled'
 
-**headerExpandedStateClass** _applied on the header_
+**headerExpandedStateClass** _(applied on the header)_
 + `__uptown-${componentType}-header-on-expand`
 + `__uptown-${componentType}-header-on-collapse`
 
