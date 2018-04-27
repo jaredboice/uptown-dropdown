@@ -28,8 +28,8 @@ _instantiation: dropdown_
 render(){
     const BodyComp = (props) => (
             <div className="example-expander">
-                <div>expanded: {props.expanded}</div>
                 <div>{props.message}</div>
+                <div>stuff</div>
                 <div>stuff</div>
                 <div>stuff</div>
                 <div>stuff</div>
@@ -51,8 +51,8 @@ render(){
             <div>that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
-                expanded={expanded} // track in your app's state as needed
-                placeholder={placeholder} // start with something simple like "select"
+                expanded={false} // track in your app's state as needed
+                placeholder="uptown dropdown" // start with something simple like "select"
                 centerPlaceholder={true}
                 anime={true}
                 flexBasis="200px"
@@ -77,8 +77,8 @@ _instantiation example: expander
             <div>dude, that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
-                expanded={expanded} // track in your app's state as needed
-                placeholder={placeholder} // start with something simple like "select"
+                expanded={false} // track in your app's state as needed
+                placeholder="uptown dropdown" // start with something simple like "select"
                 centerPlaceholder={true}
                 anime={true}
                 calculateHeight={true}
