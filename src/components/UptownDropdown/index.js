@@ -36,8 +36,6 @@ const MINIMUM_MOUSE_OUT_COLLAPSE_DELAY = 55;
 
 /* eslint-enable */
 
-let stopWatch = setTimeout(() => {}, this.mouseOutCollapseDelay);
-
 class UptownDropdown extends React.Component {
     constructor(props) {
         super(props);
@@ -55,6 +53,7 @@ class UptownDropdown extends React.Component {
             mouseOutCollapseDelay < MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
                 ? MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
                 : mouseOutCollapseDelay;
+        this.stopWatch = setTimeout(() => {}, this.mouseOutCollapseDelay);
     }
 
     componentWillMount() {
@@ -175,8 +174,8 @@ class UptownDropdown extends React.Component {
             this.validateClick(false);
         }
         if ((triggerType === CLICK_AND_HOVER || triggerType === CLICK_OR_HOVER) && this.state.expanded) {
-            clearTimeout(stopWatch);
-            stopWatch = setTimeout(() => {
+            clearTimeout(this.stopWatch);
+            this.stopWatch = setTimeout(() => {
                 if (!this.mouseOverHeader && !this.mouseOverBody) {
                     this.validateClick(false);
                 }
