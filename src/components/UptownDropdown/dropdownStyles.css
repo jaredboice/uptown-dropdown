@@ -1,0 +1,52 @@
+section.uptown-dropdown {
+    position: relative;
+}
+
+section.uptown-dropdown header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+section.uptown-dropdown header span.__uptown-dropdown-placeholder {
+    flex: 1 0;
+}
+
+section.uptown-dropdown header span.__uptown-dropdown-icon {
+    align-self: flex-end;
+    align-content: right;
+}
+
+/* expander styles and toggle animation */
+
+section.uptown-dropdown .__uptown-dropdown-body {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 20;
+    box-sizing: border-box;
+}
+
+section.uptown-dropdown .__uptown-dropdown-expand.__anime {
+    transform: scaleY(1);
+    transition: all .22s ease-out;
+    transform-origin: left top;
+    overflow: hidden;
+}
+
+section.uptown-dropdown .__uptown-dropdown-collapse.__anime {
+    transform: scaleY(0);
+    transition: all .22s ease-out;
+    transform-origin: left top;
+    overflow: hidden;
+}
+
+section.uptown-dropdown .__uptown-dropdown-expand.__no-anime {
+    display: flex;
+}
+
+section.uptown-dropdown .__uptown-dropdown-collapse.__no-anime {
+    display: none;
+}

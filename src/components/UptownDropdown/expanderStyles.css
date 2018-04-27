@@ -1,0 +1,48 @@
+section.uptown-expander {
+    position: relative;
+}
+
+section.uptown-expander header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+section.uptown-expander header span.__uptown-expander-placeholder {
+    flex: 1 0;
+}
+
+section.uptown-expander header span.__uptown-expander-icon {
+    align-self: flex-end;
+    align-content: right;
+}
+
+/* expander styles and toggle animation */
+
+section.uptown-expander .__uptown-expander-body {
+    position: relative;
+}
+
+section.uptown-expander .__uptown-expander-expand.__anime {
+    opacity: 1;
+    transform-origin: left top;
+    transition: all 0.22s ease-out;
+    overflow: hidden;
+}
+
+section.uptown-expander .__uptown-expander-collapse.__anime {
+    opacity: 0;
+    transform-origin: left top;
+    transition: all 0.22s ease-out;
+    overflow: hidden;
+}
+
+section.uptown-expander .__uptown-expander-expand.__no-anime {
+    display: flex;
+}
+
+section.uptown-expander .__uptown-expander-collapse.__no-anime {
+    display: none;
+}
