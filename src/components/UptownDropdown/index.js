@@ -63,17 +63,19 @@ class UptownDropdown extends React.Component {
         if (flexBasis || maxWidth || border || borderRadius || boxShadow) {
             quickStarterPresets = this.updateQuickStarterPresets(theseProps);
         }
-
-        // this.setState({ ...quickStarterPresets });
         this.quickStarterPresets = { ...quickStarterPresets };
     }
 
     componentDidMount() {
         this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
+        if (this.renderCount === 1 && this.forceCalculateDimension) {
+            this.forceUpdate();
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         // note on calculateDimension
+        // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
         const { flexBasis, maxWidth, border, borderRadius, boxShadow } = this.props;
         let quickStarterPresets;
@@ -84,15 +86,22 @@ class UptownDropdown extends React.Component {
             (nextProps.borderRadius && borderRadius != nextProps.borderRadius) || // eslint-disable-line eqeqeq
             (nextProps.boxShadow && boxShadow != nextProps.boxShadow) // eslint-disable-line eqeqeq
         ) {
-            quickStarterPresets = this.updateQuickStarterPresets(nextProps);
+            const nextPropsArray = {};
+            if (nextProps.flexBasis) nextPropsArray.flexBasis = nextProps.flexBasis;
+            if (nextProps.maxWidth) nextPropsArray.maxWidth = nextProps.maxWidth;
+            if (nextProps.border) nextPropsArray.border = nextProps.border;
+            if (nextProps.borderRadius) nextPropsArray.borderRadius = nextProps.borderRadius;
+            if (nextProps.boxShadow) nextPropsArray.boxShadow = nextProps.boxShadow;
+            quickStarterPresets = this.updateQuickStarterPresets(nextPropsArray);
+            this.quickStarterPresets = { ...quickStarterPresets };
         }
-        this.quickStarterPresets = { ...quickStarterPresets };
         this.setState({ expanded: nextProps.expanded });
     }
 
     componentDidUpdate() {
         // note on calculateDimension
         if (this.renderCount === 1) {
+            // eslint-disable-next-line max-len
             // when renderCount === 1 then the DOM has mounted the new body and we can calculate its dimension for animation purposes (for when props.calculateDimension is true)
             this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
         }
@@ -210,7 +219,9 @@ class UptownDropdown extends React.Component {
             };
         }
         const disabledStateClass = disabled ? '__uptown-disabled' : '__uptown-enabled';
-        const headerExpandedStateClass = expanded ? `__uptown-${componentType}-header-on-expand` : `__uptown-${componentType}-header-on-collapse`;
+        const headerExpandedStateClass = expanded
+            ? `__uptown-${componentType}-header-on-expand`
+            : `__uptown-${componentType}-header-on-collapse`;
         // build the body styles
         const bodyExpandedStateClass = expanded
             ? `__uptown-${componentType}-expand`
@@ -286,9 +297,6 @@ class UptownDropdown extends React.Component {
 
         /* eslint-enable */
         this.renderCount++;
-        if (this.renderCount === 1 && this.forceCalculateDimension) {
-            this.forceUpdate();
-        }
         return (
             <section
                 className={`uptown-${componentType} ${name}`}
@@ -381,4 +389,5 @@ UptownDropdown.defaultProps = {
     mouseOutCollapseDelay: MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { UptownDropdown };
