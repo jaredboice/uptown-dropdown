@@ -7,6 +7,9 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 ## UPGRADES COMING VERY SOON
 the following options will soon be available: 
 
+recently a breaking change of modifying 'calculateHeight' to 'calculateDimension' was made to prepare the path to the first and most exciting option below - orientation.
+I expect this to be the last big breaking change, and it was made in the first 24 hours of this package's original publish date.
+
 **orientation**
  + 'vertical', 'vertical-reverse', 'horizontal', 'horizontal-reverse'
 
@@ -14,7 +17,7 @@ the following options will soon be available:
 + the ability to hide the header and only use the 'expanded' prop as a means of toggling the body's expandability
 
 **maxHeight**
-+ useful for restricting the maxHeight of horizontal orientations only (maxWidth will only be applied on vertical orientations)
++ useful for restricting the maxHeight of horizontal orientations only (maxWidth will likewise only be applied on vertical orientations)
 
 **prependIcon**
 + when providing an IconComp, a value of true with prepend the icon before the placeholder rather than append it (default setting)
