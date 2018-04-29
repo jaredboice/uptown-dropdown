@@ -19,6 +19,16 @@ const NO_ANIME = '__no-anime';
 
 const MINIMUM_MOUSE_OUT_COLLAPSE_DELAY = 55;
 
+const integrateArrayOfStyleObjects = (arrayOfStyleObjects, inlineStyles = {}) => {
+    arrayOfStyleObjects.forEach((obj) => {
+        inlineStyles = {
+            ...inlineStyles,
+            ...obj
+        };
+    });
+    return inlineStyles;
+};
+
 /* eslint-disable */
 
 /* 
@@ -116,13 +126,8 @@ class UptownDropdown extends React.Component {
         if (maxWidth) {
             transientDimensionStyles.push({ maxWidth: `${maxWidth}` });
         }
-        let dimensionStyles = {};
-        transientDimensionStyles.forEach((obj) => {
-            dimensionStyles = {
-                ...dimensionStyles,
-                ...obj
-            };
-        });
+        
+        const dimensionStyles = integrateArrayOfStyleObjects(transientDimensionStyles);
         const transientInlineStyles = [...transientDimensionStyles];
 
         if (border) {
@@ -134,21 +139,8 @@ class UptownDropdown extends React.Component {
         if (boxShadow) {
             transientInlineStyles.push({ boxShadow: `${boxShadow}` });
         }
-        let bodyInlineStyles = {};
-        transientInlineStyles.forEach((obj) => {
-            bodyInlineStyles = {
-                ...bodyInlineStyles,
-                ...obj
-            };
-        });
-
-        let headerInlineStyles = {};
-        transientInlineStyles.forEach((obj) => {
-            headerInlineStyles = {
-                ...headerInlineStyles,
-                ...obj
-            };
-        });
+        const bodyInlineStyles = integrateArrayOfStyleObjects(transientInlineStyles);
+        const headerInlineStyles = integrateArrayOfStyleObjects(transientInlineStyles);
         return {
             containerInlineStyles: { ...dimensionStyles },
             headerInlineStyles,
