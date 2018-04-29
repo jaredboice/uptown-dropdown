@@ -4,6 +4,24 @@
 
 get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at gitHub.
 
+## UPGRADES COMING VERY SOON
+the following options will soon be available: 
+
+**orientation**
+ + 'vertical', 'vertical-reverse', 'horizontal', 'horizontal-reverse'
+
+**hideHeader**
++ the ability to hide the header and only use the 'expanded' prop as a means of toggling the body's expandability
+
+**maxHeight**
++ useful for restricting the maxHeight of horizontal orientations only (maxWidth will only be applied on vertical orientations)
+
+**prependIcon**
++ when providing an IconComp, a value of true with prepend the icon before the placeholder rather than append it (default setting)
+
+**flexBasis**
++ in the next update, flexBasis will not be required for componentType = 'expander' (and probably shouldn't be used for that componentType unless needed)
+
 ## Description
 
 **Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list and opens the door for components that do not apply a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, and the expansion state is passed as a parameter to the click handler and to the optional header/icon components when provided.
