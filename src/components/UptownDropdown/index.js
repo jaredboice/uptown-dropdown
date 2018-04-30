@@ -263,7 +263,7 @@ class UptownDropdown extends React.Component {
         }
         // calculateDimension and calculateHeight are synonymous
         // eslint-disable-next-line eqeqeq
-        if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != 'no-anime')) {
+        if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != NO_ANIME)) {
             bodyInlineStyles = expanded
                 ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
                 : { ...bodyInlineStyles, maxHeight: 0 };

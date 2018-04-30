@@ -26,13 +26,13 @@ section.uptown-expander-container .__uptown-expander-body {
 
 section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
-    transform-origin: left top;
+    transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container .__uptown-expander-collapse.__anime {
     opacity: 0;
-    transform-origin: left top;
+    transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
