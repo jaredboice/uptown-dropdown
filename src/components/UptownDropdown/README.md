@@ -282,8 +282,6 @@ section.uptown-expander-container {
 
 section.uptown-expander-container header {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     cursor: pointer;
     user-select: none;
 }
@@ -308,7 +306,6 @@ section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
     transform-origin: left top;
     transition: all 0.22s ease-out;
-    
 }
 
 section.uptown-expander-container .__uptown-expander-collapse.__anime {
