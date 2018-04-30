@@ -1,5 +1,5 @@
 section.uptown-expander-container {
-    position: relative;
+   
 }
 
 section.uptown-expander-container header {
@@ -11,7 +11,7 @@ section.uptown-expander-container header {
 }
 
 section.uptown-expander-container header span.__uptown-expander-placeholder {
-    flex: 1 0;
+    flex: 1 1;
 }
 
 section.uptown-expander-container header span.__uptown-expander-icon {
@@ -22,21 +22,21 @@ section.uptown-expander-container header span.__uptown-expander-icon {
 /* expander styles and toggle animation */
 
 section.uptown-expander-container .__uptown-expander-body {
-    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
     transform-origin: left top;
     transition: all 0.22s ease-out;
-    overflow: hidden;
+    
 }
 
 section.uptown-expander-container .__uptown-expander-collapse.__anime {
     opacity: 0;
     transform-origin: left top;
     transition: all 0.22s ease-out;
-    overflow: hidden;
 }
 
 section.uptown-expander-container .__uptown-expander-expand.__no-anime {

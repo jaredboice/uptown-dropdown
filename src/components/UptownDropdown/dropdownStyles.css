@@ -4,14 +4,12 @@ section.uptown-dropdown-container {
 
 section.uptown-dropdown-container header {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     cursor: pointer;
     user-select: none;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-placeholder {
-    flex: 1 0;
+    flex: 1 1;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-icon {
@@ -27,20 +25,19 @@ section.uptown-dropdown-container .__uptown-dropdown-body {
     width: 100%;
     z-index: 20;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
+    transform-origin: center top;
     transition: all .22s ease-out;
-    transform-origin: left top;
-    overflow: hidden;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
+    transform-origin: center top;
     transition: all .22s ease-out;
-    transform-origin: left top;
-    overflow: hidden;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-expand.__no-anime {

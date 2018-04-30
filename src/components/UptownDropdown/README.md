@@ -228,14 +228,12 @@ section.uptown-dropdown-container {
 
 section.uptown-dropdown-container header {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     cursor: pointer;
     user-select: none;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-placeholder {
-    flex: 1 0;
+    flex: 1 1;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-icon {
@@ -251,20 +249,19 @@ section.uptown-dropdown-container .__uptown-dropdown-body {
     width: 100%;
     z-index: 20;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
-    transition: all 0.22s ease-out;
-    transform-origin: left top;
-    overflow: hidden;
+    transform-origin: center top;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
-    transition: all 0.22s ease-out;
-    transform-origin: left top;
-    overflow: hidden;
+    transform-origin: center top;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container .__uptown-dropdown-expand.__no-anime {
@@ -280,7 +277,7 @@ section.uptown-dropdown-container .__uptown-dropdown-collapse.__no-anime {
 
 ```css
 section.uptown-expander-container {
-    position: relative;
+   
 }
 
 section.uptown-expander-container header {
@@ -292,7 +289,7 @@ section.uptown-expander-container header {
 }
 
 section.uptown-expander-container header span.__uptown-expander-placeholder {
-    flex: 1 0;
+    flex: 1 1;
 }
 
 section.uptown-expander-container header span.__uptown-expander-icon {
@@ -303,21 +300,21 @@ section.uptown-expander-container header span.__uptown-expander-icon {
 /* expander styles and toggle animation */
 
 section.uptown-expander-container .__uptown-expander-body {
-    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
     transform-origin: left top;
     transition: all 0.22s ease-out;
-    overflow: hidden;
+    
 }
 
 section.uptown-expander-container .__uptown-expander-collapse.__anime {
     opacity: 0;
     transform-origin: left top;
     transition: all 0.22s ease-out;
-    overflow: hidden;
 }
 
 section.uptown-expander-container .__uptown-expander-expand.__no-anime {
