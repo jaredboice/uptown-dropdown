@@ -126,7 +126,7 @@ class UptownDropdown extends React.Component {
         if (maxWidth) {
             transientDimensionStyles.push({ maxWidth: `${maxWidth}` });
         }
-        
+
         const dimensionStyles = integrateArrayOfStyleObjects(transientDimensionStyles);
         const transientInlineStyles = [...transientDimensionStyles];
 
@@ -191,6 +191,8 @@ class UptownDropdown extends React.Component {
             placeholder,
             centerPlaceholder,
             anime,
+            prependIcon,
+            hideHeader,
             HeaderComp,
             BodyComp,
             IconComp,
@@ -201,14 +203,46 @@ class UptownDropdown extends React.Component {
             componentType
         } = this.props;
         const { expanded } = this.state;
-        let adjustedHeaderInlineStyles = { ...this.quickStarterPresets.headerInlineStyles };
-        let adjustedBodyInlineStyles = { ...this.quickStarterPresets.bodyInlineStyles };
+        const containerInlineStyles = { ...this.quickStarterPresets.containerInlineStyles };
+        let headerInlineStyles = {};
+        let bodyInlineStyles = { ...this.quickStarterPresets.bodyInlineStyles };
+        let placeholderInlineStyles = {};
+        let iconInlineStyles = {};
         // build the header styles
-        if (centerPlaceholder) {
-            adjustedHeaderInlineStyles = {
-                ...adjustedHeaderInlineStyles,
-                textAlign: 'center'
+
+
+        if (hideHeader) {
+            headerInlineStyles = {
+                visibility: 'hidden',
+                position: 'absolute',
+                zIndex: -999
             };
+        } else {
+            if (centerPlaceholder) {
+                headerInlineStyles = {
+                    ...headerInlineStyles,
+                    textAlign: 'center'
+                };
+            }
+            headerInlineStyles = {
+                ...headerInlineStyles,
+                ...this.quickStarterPresets.headerInlineStyles
+            };
+            if (prependIcon) {
+                placeholderInlineStyles = {
+                    order: 2
+                };
+                iconInlineStyles = {
+                    order: 1
+                };
+            } else {
+                placeholderInlineStyles = {
+                    order: 1
+                };
+                iconInlineStyles = {
+                    order: 2
+                };
+            }
         }
         const disabledStateClass = disabled ? '__uptown-disabled' : '__uptown-enabled';
         const headerExpandedStateClass = expanded
@@ -230,9 +264,9 @@ class UptownDropdown extends React.Component {
         // calculateDimension and calculateHeight are synonymous
         // eslint-disable-next-line eqeqeq
         if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != 'no-anime')) {
-            adjustedBodyInlineStyles = expanded
-                ? { ...adjustedBodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
-                : { ...adjustedBodyInlineStyles, maxHeight: 0 };
+            bodyInlineStyles = expanded
+                ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
+                : { ...bodyInlineStyles, maxHeight: 0 };
             this.forceCalculateDimension = true;
         }
         // class list integration
@@ -260,7 +294,7 @@ class UptownDropdown extends React.Component {
                 this.validateMouseOut(triggerType);
             },
             className: headerClassList,
-            style: { ...adjustedHeaderInlineStyles }
+            style: { ...headerInlineStyles }
         };
         let headerComponentProps = {};
         let iconComponentProps = {};
@@ -292,8 +326,8 @@ class UptownDropdown extends React.Component {
         this.renderCount++;
         return (
             <section
-                className={`uptown-${componentType} ${name}`}
-                style={{ ...this.quickStarterPresets.containerInlineStyles }}
+                className={`uptown-${componentType}-container ${name}`}
+                style={{ ...containerInlineStyles }}
                 onMouseOut={() => {
                     this.mouseOverBody = false;
                     this.validateMouseOut(triggerType);
@@ -304,11 +338,11 @@ class UptownDropdown extends React.Component {
                 }}
             >
                 <header {...headerAttributes}>
-                    <span className={`__uptown-${componentType}-placeholder`}>
+                    <span className={`__uptown-${componentType}-placeholder`} style={{ ...placeholderInlineStyles }}>
                         {HeaderComp != null && <HeaderComp {...headerComponentProps} />}
                         {HeaderComp == null && placeholder}
                     </span>
-                    <span className={`__uptown-${componentType}-icon`}>
+                    <span className={`__uptown-${componentType}-icon`} style={{ ...iconInlineStyles }} >
                         {IconComp && <IconComp {...iconComponentProps} />}
                     </span>
                 </header>
@@ -317,7 +351,7 @@ class UptownDropdown extends React.Component {
                         this.uptownBody = element;
                     }}
                     className={bodyClassList}
-                    style={{ ...adjustedBodyInlineStyles }}
+                    style={{ ...bodyInlineStyles }}
                     onMouseOver={() => {
                         this.mouseOverBody = true;
                         this.validateMouseOver(triggerType, BODY);
@@ -343,11 +377,13 @@ UptownDropdown.propTypes = {
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     calculateDimension: PropTypes.bool,
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
+    prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
     maxWidth: PropTypes.string,
     border: PropTypes.string,
     borderRadius: PropTypes.string,
     boxShadow: PropTypes.string,
+    hideHeader: PropTypes.bool,
     HeaderComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     IconComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     BodyComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
@@ -368,11 +404,13 @@ UptownDropdown.defaultProps = {
     anime: false,
     calculateDimension: false,
     calculateHeight: false,
+    prependIcon: false,
     flexBasis: null,
     maxWidth: null,
     border: null,
     borderRadius: null,
     boxShadow: null,
+    hideHeader: false,
     HeaderComp: null,
     IconComp: null,
     headerCompProps: {},

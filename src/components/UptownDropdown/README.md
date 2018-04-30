@@ -2,7 +2,7 @@
 
 # Uptown-Dropdown - Documentation
 
-![List-Runner](screenshots/uptown-dropdown-logo.png "uptown-dropdown")
+![List-Runner](screenshots/uptown-dropdown-logo.png 'uptown-dropdown')
 
 ## Description
 
@@ -17,10 +17,11 @@
 **Import**
 
 _importing the commonly needed classes_
-```javascript  
-import UptownDropdown from 'list-runner';
 
+```javascript
+import UptownDropdown from 'list-runner';
 ```
+
 _instantiation: dropdown_
 
 ```javascript
@@ -69,7 +70,7 @@ render(){
 }
 ```
 
-_instantiation example: expander
+\_instantiation example: expander
 
 ```javascript
     return (
@@ -108,11 +109,13 @@ UptownDropdown.propTypes = {
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__anime') || (false || '__no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body height when expanded and apply 0 on collapse
-    flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
-    maxWidth: PropTypes.string, // eg. '600px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body 
-    border: PropTypes.string, // eg. '1px solid dimgray' - quick-starter setting for synchronizing the border of the header and the body 
-    borderRadius: PropTypes.string, eg. // '3px' - quick-starter setting for synchronizing the border-radius of the header and the body 
+    prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
+    flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body
+    maxWidth: PropTypes.string, // eg. '600px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body
+    border: PropTypes.string, // eg. '1px solid dimgray' - quick-starter setting for synchronizing the border of the header and the body
+    borderRadius: PropTypes.string, eg. // '3px' - quick-starter setting for synchronizing the border-radius of the header and the body
     boxShadow: PropTypes.string, // eg. '3px 3px 3px 3px black' - quick-starter setting for synchronizing the box-shadow of the header and the body
+    hideHeader: PropTypes.bool, // hides the header from view so you can use the expanded prop to control the expansion/collapse of the component without the header being rendered
     HeaderComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]), // custom header component - receives expanded and headerCompProps via props
     IconComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]), // custom icon component - receives expanded and iconCompProps via props
     BodyComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired, // the expandable body component - receives bodyCompProps via props
@@ -132,11 +135,13 @@ UptownDropdown.defaultProps = {
     centerPlaceholder: false,
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
+    prependIcon: false,
     flexBasis: null,
     maxWidth: null,
     border: null,
     borderRadius: null,
     boxShadow: null,
+    hideHeader: false,
     HeaderComp: null,
     IconComp: null,
     headerCompProps: {},
@@ -152,34 +157,42 @@ UptownDropdown.defaultProps = {
 ## CSS ClassNames Applied by State
 
 **container**
-+ `uptown-${componentType} ${name}`
+
+*   `uptown-${componentType} ${name}`
 
 **HeaderComp/placeholder**
-+ `__uptown-${componentType}-placeholder`
+
+*   `__uptown-${componentType}-placeholder`
 
 **icon**
-+ `__uptown-${componentType}-icon`
+
+*   `__uptown-${componentType}-icon`
 
 **disabledStateClass** _applied on the header_
-+ '__uptown-disabled'
-+ '__uptown-enabled'
 
-**headerExpandedStateClass
-+ `__uptown-${componentType}-header-on-expand`
-+ `__uptown-${componentType}-header-on-collapse`
+*   '\_\_uptown-disabled'
+*   '\_\_uptown-enabled'
+
+\*\*headerExpandedStateClass
+
+*   `__uptown-${componentType}-header-on-expand`
+*   `__uptown-${componentType}-header-on-collapse`
 
 **bodyExpandedStateClass** _(applied on the body)_
-+ `__uptown-${componentType}-expand`
-+ `__uptown-${componentType}-collapse`
 
-**animeStateClass** _(applied on the body)_ 
-+ '__anime'
-+ '__no-anime'
-+ 'any-custom-class-name'
+*   `__uptown-${componentType}-expand`
+*   `__uptown-${componentType}-collapse`
 
-**class list integration** 
-+ const headerClassList = `${disabledStateClass} ${headerExpandedStateClass}`;
-+ const bodyClassList = `__uptown-${componentType}-body ${bodyExpandedStateClass} ${animeStateClass}`;
+**animeStateClass** _(applied on the body)_
+
+*   '\_\_anime'
+*   '\_\_no-anime'
+*   'any-custom-class-name'
+
+**class list integration**
+
+*   const headerClassList = `${disabledStateClass} ${headerExpandedStateClass}`;
+*   const bodyClassList = `__uptown-${componentType}-body ${bodyExpandedStateClass} ${animeStateClass}`;
 
 ## Quick Starter Presets
 
@@ -191,23 +204,13 @@ _when provided, the following props will be applied to both the header and the b
 **borderRadius**
 **boxShadow**
 
-
-
 ## CSS Modification Example
 
-**Changing the Order of the Icon and Placeholder
+**Right Aligning the Placeholder with _prependIcon_ set to true and _centerPlaceholder_ set to false**
 
 ```css
-section.uptown-dropdown.value-of-name-prop header span.__uptown-dropdown-placeholder {
-    flex: 1 0;
-    order: 2;
-}
-
-section.uptown-dropdown header span.__uptown-dropdown-icon {
-    align-self: flex-end;
-    align-content: right;
-    order: 1; 
-    /* optionally right-align the placeholder with something like a very large flex-grow setting */
+/* right-aligning the placeholder with a very large flex-grow setting */
+.uptown-dropdown-container.value-of-name-prop .__uptown-dropdown-icon {
     flex: 100 0;
 }
 ```
@@ -219,11 +222,11 @@ _note_: to apply the types of css modifications above to componentType = "expand
 **dropdown css**
 
 ```css
-section.uptown-dropdown {
+section.uptown-dropdown-container {
     position: relative;
 }
 
-section.uptown-dropdown header {
+section.uptown-dropdown-container header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -231,18 +234,18 @@ section.uptown-dropdown header {
     user-select: none;
 }
 
-section.uptown-dropdown header span.__uptown-dropdown-placeholder {
+section.uptown-dropdown-container header span.__uptown-dropdown-placeholder {
     flex: 1 0;
 }
 
-section.uptown-dropdown header span.__uptown-dropdown-icon {
+section.uptown-dropdown-container header span.__uptown-dropdown-icon {
     align-self: flex-end;
     align-content: right;
 }
 
 /* expander styles and toggle animation */
 
-section.uptown-dropdown .__uptown-dropdown-body {
+section.uptown-dropdown-container .__uptown-dropdown-body {
     position: absolute;
     top: 100%;
     width: 100%;
@@ -250,25 +253,25 @@ section.uptown-dropdown .__uptown-dropdown-body {
     box-sizing: border-box;
 }
 
-section.uptown-dropdown .__uptown-dropdown-expand.__anime {
+section.uptown-dropdown-container .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
-    transition: all .22s ease-out;
+    transition: all 0.22s ease-out;
     transform-origin: left top;
     overflow: hidden;
 }
 
-section.uptown-dropdown .__uptown-dropdown-collapse.__anime {
+section.uptown-dropdown-container .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
-    transition: all .22s ease-out;
+    transition: all 0.22s ease-out;
     transform-origin: left top;
     overflow: hidden;
 }
 
-section.uptown-dropdown .__uptown-dropdown-expand.__no-anime {
+section.uptown-dropdown-container .__uptown-dropdown-expand.__no-anime {
     display: flex;
 }
 
-section.uptown-dropdown .__uptown-dropdown-collapse.__no-anime {
+section.uptown-dropdown-container .__uptown-dropdown-collapse.__no-anime {
     display: none;
 }
 ```
@@ -276,11 +279,11 @@ section.uptown-dropdown .__uptown-dropdown-collapse.__no-anime {
 ## Expander CSS
 
 ```css
-section.uptown-expander {
+section.uptown-expander-container {
     position: relative;
 }
 
-section.uptown-expander header {
+section.uptown-expander-container header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -288,40 +291,40 @@ section.uptown-expander header {
     user-select: none;
 }
 
-section.uptown-expander header span.__uptown-expander-placeholder {
+section.uptown-expander-container header span.__uptown-expander-placeholder {
     flex: 1 0;
 }
 
-section.uptown-expander header span.__uptown-expander-icon {
+section.uptown-expander-container header span.__uptown-expander-icon {
     align-self: flex-end;
     align-content: right;
 }
 
 /* expander styles and toggle animation */
 
-section.uptown-expander .__uptown-expander-body {
+section.uptown-expander-container .__uptown-expander-body {
     position: relative;
 }
 
-section.uptown-expander .__uptown-expander-expand.__anime {
+section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
     transform-origin: left top;
     transition: all 0.22s ease-out;
     overflow: hidden;
 }
 
-section.uptown-expander .__uptown-expander-collapse.__anime {
+section.uptown-expander-container .__uptown-expander-collapse.__anime {
     opacity: 0;
     transform-origin: left top;
     transition: all 0.22s ease-out;
     overflow: hidden;
 }
 
-section.uptown-expander .__uptown-expander-expand.__no-anime {
+section.uptown-expander-container .__uptown-expander-expand.__no-anime {
     display: flex;
 }
 
-section.uptown-expander .__uptown-expander-collapse.__no-anime {
+section.uptown-expander-container .__uptown-expander-collapse.__no-anime {
     display: none;
 }
 ```
@@ -330,8 +333,8 @@ section.uptown-expander .__uptown-expander-collapse.__no-anime {
 
 ```javascript
 <section
-    className={`uptown-${componentType} ${name}`}
-    style={{ ...this.quickStarterPresets.containerInlineStyles }}
+    className={`uptown-${componentType}-container ${name}`}
+    style={{ ...containerInlineStyles }}
     onMouseOut={() => {
         this.mouseOverBody = false;
         this.validateMouseOut(triggerType);
@@ -340,23 +343,21 @@ section.uptown-expander .__uptown-expander-collapse.__no-anime {
         this.mouseOverBody = false;
         this.validateMouseOut(triggerType);
     }}>
-
     <header {...headerAttributes}>
-        <span className={`__uptown-${componentType}-placeholder`}>
+        <span className={`__uptown-${componentType}-placeholder`} style={{ ...placeholderInlineStyles }}>
             {HeaderComp != null && <HeaderComp {...headerComponentProps} />}
             {HeaderComp == null && placeholder}
         </span>
-        <span className={`__uptown-${componentType}-icon`}>
+        <span className={`__uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
             {IconComp && <IconComp {...iconComponentProps} />}
         </span>
     </header>
-
     <div
         ref={(element) => {
             this.uptownBody = element;
         }}
         className={bodyClassList}
-        style={{ ...adjustedBodyInlineStyles }}
+        style={{ ...bodyInlineStyles }}
         onMouseOver={() => {
             this.mouseOverBody = true;
             this.validateMouseOver(triggerType, BODY);
@@ -367,6 +368,5 @@ section.uptown-expander .__uptown-expander-collapse.__no-anime {
         }}>
         {BodyComp != null && <BodyComp {...bodyCompProps} />}
     </div>
-
 </section>
 ```

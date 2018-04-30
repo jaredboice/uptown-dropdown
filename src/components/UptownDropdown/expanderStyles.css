@@ -1,8 +1,8 @@
-section.uptown-expander {
+section.uptown-expander-container {
     position: relative;
 }
 
-section.uptown-expander header {
+section.uptown-expander-container header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -10,39 +10,39 @@ section.uptown-expander header {
     user-select: none;
 }
 
-section.uptown-expander header span.__uptown-expander-placeholder {
+section.uptown-expander-container header span.__uptown-expander-placeholder {
     flex: 1 0;
 }
 
-section.uptown-expander header span.__uptown-expander-icon {
+section.uptown-expander-container header span.__uptown-expander-icon {
     align-self: flex-end;
     align-content: right;
 }
 
 /* expander styles and toggle animation */
 
-section.uptown-expander .__uptown-expander-body {
+section.uptown-expander-container .__uptown-expander-body {
     position: relative;
 }
 
-section.uptown-expander .__uptown-expander-expand.__anime {
+section.uptown-expander-container .__uptown-expander-expand.__anime {
     opacity: 1;
     transform-origin: left top;
     transition: all 0.22s ease-out;
     overflow: hidden;
 }
 
-section.uptown-expander .__uptown-expander-collapse.__anime {
+section.uptown-expander-container .__uptown-expander-collapse.__anime {
     opacity: 0;
     transform-origin: left top;
     transition: all 0.22s ease-out;
     overflow: hidden;
 }
 
-section.uptown-expander .__uptown-expander-expand.__no-anime {
+section.uptown-expander-container .__uptown-expander-expand.__no-anime {
     display: flex;
 }
 
-section.uptown-expander .__uptown-expander-collapse.__no-anime {
+section.uptown-expander-container .__uptown-expander-collapse.__no-anime {
     display: none;
 }
