@@ -215,7 +215,7 @@ _when provided, the following props will be applied to both the header and the b
 }
 ```
 
-_note_: to apply the types of css modifications above to componentType = "expander", simply replace all the instances of "dropdown" in the class lists with "expander"
+_note_: to apply the type of css modification above to componentType = "expander", simply replace all the instances of "dropdown" in the class lists with "expander"
 
 ## CSS Files
 
