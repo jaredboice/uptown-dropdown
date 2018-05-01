@@ -19,7 +19,9 @@ section.uptown-dropdown-container header span.__uptown-dropdown-icon {
 
 /* expander styles and toggle animation */
 
-section.uptown-dropdown-container .__uptown-dropdown-body {
+/* orientation: vertical */
+
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-body {
     position: absolute;
     top: 100%;
     width: 100%;
@@ -28,17 +30,90 @@ section.uptown-dropdown-container .__uptown-dropdown-body {
     overflow: hidden;
 }
 
-section.uptown-dropdown-container .__uptown-dropdown-expand.__anime {
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
     transform-origin: center top;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container .__uptown-dropdown-collapse.__anime {
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
     transform-origin: center top;
     transition: all .22s ease-out;
 }
+
+/* orientation: vertical-reverse */
+
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-body {
+    position: absolute;
+    bottom: 100%;
+    width: 100%;
+    z-index: 20;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__anime {
+    transform: scaleY(1);
+    transform-origin: center bottom;
+    transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__anime {
+    transform: scaleY(0);
+    transform-origin: center bottom;
+    transition: all .22s ease-out;
+}
+
+/* orientation: horizontal */
+
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-body {
+    position: absolute;
+    left: 100%;
+    top: 0%;
+    z-index: 20;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__anime {
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__anime {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: all .22s ease-out;
+}
+
+/* orientation: horizontal-reverse */
+
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-body {
+    position: absolute;
+    right: 100%;
+    top: 0%;
+    z-index: 20;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__anime {
+    transform: scaleX(1);
+    transform-origin: right center;
+    transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__anime {
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: all .22s ease-out;
+}
+
+/* no anime */
 
 section.uptown-dropdown-container .__uptown-dropdown-expand.__no-anime {
     display: flex;

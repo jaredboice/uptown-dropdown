@@ -6,7 +6,7 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 
 ## Description
 
-**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list and opens the door for components that do not apply a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, and the expansion state is passed as a parameter to the click handler and to the optional header/icon components when provided.
+**Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the expandable body which decouples the dropdown from a list. Uptown-Dropdown offers optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, the ability to pass custom props to custom components, and parameter injection of the expansion state to the click handler and to optional header/icon components as a key/value of props.
 
 ## Install, Import & Instantiate
 
@@ -18,7 +18,7 @@ get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at g
 
 _importing the commonly needed classes_
 ```javascript  
-import UptownDropdown from 'list-runner';
+import UptownDropdown from 'uptown-dropdown';
 
 ```
 _instantiation example: dropdown_
@@ -51,18 +51,17 @@ render(){
             <div>dude, that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
-                expanded={expanded} // track in your app's state as needed
-                placeholder={placeholder} // start with something simple like "select"
+                expanded={false} // track in your app's state as needed
+                placeholder="choose your fate" // start with something simple like "select"
                 centerPlaceholder={true}
                 anime={true}
-                flexBasis="200px"
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
                 BodyComp={BodyComp}
                 IconComp={IconComp}
                 bodyCompProps={bodyCompProps}
-                triggerType="clickAndHover"
+                triggerType="clickOrHover"
             />
         </section>
     );
@@ -77,19 +76,18 @@ _instantiation example: expander_
             <div>dude, that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
-                expanded={expanded} // track in your app's state as needed
-                placeholder={placeholder} // start with something simple like "select"
+                expanded={false} // track in your app's state as needed
+                placeholder="choose your fate" // start with something simple like "select"
                 centerPlaceholder={true}
                 anime={true}
                 calculateDimension={true}
-                flexBasis="200px"
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
                 BodyComp={BodyComp}
                 IconComp={IconComp}
                 bodyCompProps={bodyCompProps}
-                triggerType="click"
+                triggerType="clickOrHover"
                 componentType="expander"
             />
         </section>
@@ -107,10 +105,12 @@ UptownDropdown.propTypes = {
     placeholder: PropTypes.string, // text that will be used if HeaderComp is not provided
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__anime') || (false || '__no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
+    orientation: PropTypes.string, // // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
     prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
-    maxWidth: PropTypes.string, // eg. '600px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body 
+    maxWidth: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body (on vertical orientations)
+    maxHeight: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-height of the container, the header, and the body (on horizontal orientations)
     border: PropTypes.string, // eg. '1px solid dimgray' - quick-starter setting for synchronizing the border of the header and the body 
     borderRadius: PropTypes.string, eg. // '3px' - quick-starter setting for synchronizing the border-radius of the header and the body 
     boxShadow: PropTypes.string, // eg. '3px 3px 3px 3px black' - quick-starter setting for synchronizing the box-shadow of the header and the body
@@ -133,10 +133,12 @@ UptownDropdown.defaultProps = {
     placeholder: 'select',
     centerPlaceholder: false,
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
+    orientation: VERTICAL, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
     prependIcon: false, 
     flexBasis: null,
     maxWidth: null,
+    maxHeight: null,
     border: null,
     borderRadius: null,
     boxShadow: null,

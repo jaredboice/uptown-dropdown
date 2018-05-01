@@ -17,6 +17,11 @@ const EXPANDER = 'expander'; // eslint-disable-line no-unused-vars
 const ANIME = '__anime';
 const NO_ANIME = '__no-anime';
 
+const VERTICAL = 'vertical';
+const VERTICAL_REVERSE = 'vertical-reverse';
+const HORIZONTAL = 'horizontal';
+const HORIZONTAL_REVERSE = 'horizontal-reverse';
+
 const MINIMUM_MOUSE_OUT_COLLAPSE_DELAY = 55;
 
 const integrateArrayOfStyleObjects = (arrayOfStyleObjects, inlineStyles = {}) => {
@@ -68,9 +73,9 @@ class UptownDropdown extends React.Component {
 
     componentWillMount() {
         const theseProps = this.props;
-        const { flexBasis, maxWidth, border, borderRadius, boxShadow } = this.props;
+        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow } = this.props;
         let quickStarterPresets;
-        if (flexBasis || maxWidth || border || borderRadius || boxShadow) {
+        if (flexBasis || maxWidth || maxHeight || border || borderRadius || boxShadow) {
             quickStarterPresets = this.updateQuickStarterPresets(theseProps);
         }
         this.quickStarterPresets = { ...quickStarterPresets };
@@ -78,6 +83,7 @@ class UptownDropdown extends React.Component {
 
     componentDidMount() {
         this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
+        this.calculatedUptownBodyWidth = this.uptownBody.offsetWidth;
         if (this.renderCount === 1 && this.forceCalculateDimension) {
             this.forceUpdate();
         }
@@ -87,22 +93,25 @@ class UptownDropdown extends React.Component {
         // note on calculateDimension
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
-        const { flexBasis, maxWidth, border, borderRadius, boxShadow } = this.props;
+        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = this.props;
         let quickStarterPresets;
         if (
             (nextProps.flexBasis && flexBasis != nextProps.flexBasis) || // eslint-disable-line eqeqeq
             (nextProps.maxWidth && maxWidth != nextProps.maxWidth) || // eslint-disable-line eqeqeq
+            (nextProps.maxHeight && maxHeight != nextProps.maxHeight) || // eslint-disable-line eqeqeq
             (nextProps.border && border != nextProps.border) || // eslint-disable-line eqeqeq
             (nextProps.borderRadius && borderRadius != nextProps.borderRadius) || // eslint-disable-line eqeqeq
             (nextProps.boxShadow && boxShadow != nextProps.boxShadow) // eslint-disable-line eqeqeq
         ) {
-            const nextPropsArray = {};
-            if (nextProps.flexBasis) nextPropsArray.flexBasis = nextProps.flexBasis;
-            if (nextProps.maxWidth) nextPropsArray.maxWidth = nextProps.maxWidth;
-            if (nextProps.border) nextPropsArray.border = nextProps.border;
-            if (nextProps.borderRadius) nextPropsArray.borderRadius = nextProps.borderRadius;
-            if (nextProps.boxShadow) nextPropsArray.boxShadow = nextProps.boxShadow;
-            quickStarterPresets = this.updateQuickStarterPresets(nextPropsArray);
+            const nextPropsObj = {};
+            if (nextProps.flexBasis) nextPropsObj.flexBasis = nextProps.flexBasis;
+            if (nextProps.maxWidth) nextPropsObj.maxWidth = nextProps.maxWidth;
+            if (nextProps.maxHeight) nextPropsObj.maxHeight = nextProps.maxHeight;
+            if (nextProps.border) nextPropsObj.border = nextProps.border;
+            if (nextProps.borderRadius) nextPropsObj.borderRadius = nextProps.borderRadius;
+            if (nextProps.boxShadow) nextPropsObj.boxShadow = nextProps.boxShadow;
+            nextPropsObj.orientation = orientation;
+            quickStarterPresets = this.updateQuickStarterPresets(nextPropsObj);
             this.quickStarterPresets = { ...quickStarterPresets };
         }
         this.setState({ expanded: nextProps.expanded });
@@ -114,17 +123,21 @@ class UptownDropdown extends React.Component {
             // eslint-disable-next-line max-len
             // when renderCount === 1 then the DOM has mounted the new body and we can calculate its dimension for animation purposes (for when props.calculateDimension is true)
             this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
+            this.calculatedUptownBodyWidth = this.uptownBody.scrollWidth;
         }
     }
 
     updateQuickStarterPresets(that) {
-        const { flexBasis, maxWidth, border, borderRadius, boxShadow } = that;
+        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = that;
         const transientDimensionStyles = [];
         if (flexBasis) {
             transientDimensionStyles.push({ flexBasis: `${flexBasis}` });
         }
-        if (maxWidth) {
+        if (maxWidth && (orientation === VERTICAL || orientation === VERTICAL_REVERSE)) {
             transientDimensionStyles.push({ maxWidth: `${maxWidth}` });
+        }
+        if (maxHeight && (orientation === HORIZONTAL || orientation === HORIZONTAL_REVERSE)) {
+            transientDimensionStyles.push({ maxHeight: `${maxHeight}` });
         }
 
         const dimensionStyles = integrateArrayOfStyleObjects(transientDimensionStyles);
@@ -184,6 +197,28 @@ class UptownDropdown extends React.Component {
         }
     }
 
+    renderBody(bodyClassList, bodyInlineStyles, triggerType, BodyComp, bodyCompProps) {
+        return (
+            <div
+                ref={(element) => {
+                    this.uptownBody = element;
+                }}
+                className={bodyClassList}
+                style={{ ...bodyInlineStyles }}
+                onMouseOver={() => {
+                    this.mouseOverBody = true;
+                    this.validateMouseOver(triggerType, BODY);
+                }}
+                onFocus={() => {
+                    this.mouseOverBody = true;
+                    this.validateMouseOver(triggerType, BODY);
+                }}
+            >
+                {BodyComp != null && <BodyComp {...bodyCompProps} />}
+            </div>
+        );
+    }
+
     render() {
         const {
             name,
@@ -191,6 +226,7 @@ class UptownDropdown extends React.Component {
             placeholder,
             centerPlaceholder,
             anime,
+            orientation,
             prependIcon,
             hideHeader,
             HeaderComp,
@@ -203,13 +239,11 @@ class UptownDropdown extends React.Component {
             componentType
         } = this.props;
         const { expanded } = this.state;
-        const containerInlineStyles = { ...this.quickStarterPresets.containerInlineStyles };
         let headerInlineStyles = {};
         let bodyInlineStyles = { ...this.quickStarterPresets.bodyInlineStyles };
         let placeholderInlineStyles = {};
         let iconInlineStyles = {};
         // build the header styles
-
 
         if (hideHeader) {
             headerInlineStyles = {
@@ -264,9 +298,16 @@ class UptownDropdown extends React.Component {
         // calculateDimension and calculateHeight are synonymous
         // eslint-disable-next-line eqeqeq
         if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != NO_ANIME)) {
-            bodyInlineStyles = expanded
-                ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
-                : { ...bodyInlineStyles, maxHeight: 0 };
+            if (orientation === VERTICAL || orientation === VERTICAL_REVERSE) {
+                bodyInlineStyles = expanded
+                    ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
+                    : { ...bodyInlineStyles, maxHeight: 0 };
+            } else {
+                bodyInlineStyles = expanded
+                    ? { ...bodyInlineStyles, maxWidth: `${this.calculatedUptownBodyWidth}px` }
+                    : { ...bodyInlineStyles, maxWidth: 0 };
+            }
+
             this.forceCalculateDimension = true;
         }
         // class list integration
@@ -326,8 +367,8 @@ class UptownDropdown extends React.Component {
         this.renderCount++;
         return (
             <section
-                className={`uptown-${componentType}-container ${name}`}
-                style={{ ...containerInlineStyles }}
+                className={`uptown-${componentType}-container ${name} uptown-orientation-${orientation}`}
+                style={{ ...this.quickStarterPresets.containerInlineStyles }}
                 onMouseOut={() => {
                     this.mouseOverBody = false;
                     this.validateMouseOut(triggerType);
@@ -337,32 +378,19 @@ class UptownDropdown extends React.Component {
                     this.validateMouseOut(triggerType);
                 }}
             >
+                {(orientation === VERTICAL_REVERSE || orientation === HORIZONTAL_REVERSE) &&
+                    this.renderBody(bodyClassList, bodyInlineStyles, triggerType, BodyComp, bodyCompProps)}
                 <header {...headerAttributes}>
                     <span className={`__uptown-${componentType}-placeholder`} style={{ ...placeholderInlineStyles }}>
                         {HeaderComp != null && <HeaderComp {...headerComponentProps} />}
                         {HeaderComp == null && placeholder}
                     </span>
-                    <span className={`__uptown-${componentType}-icon`} style={{ ...iconInlineStyles }} >
+                    <span className={`__uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
                         {IconComp && <IconComp {...iconComponentProps} />}
                     </span>
                 </header>
-                <div
-                    ref={(element) => {
-                        this.uptownBody = element;
-                    }}
-                    className={bodyClassList}
-                    style={{ ...bodyInlineStyles }}
-                    onMouseOver={() => {
-                        this.mouseOverBody = true;
-                        this.validateMouseOver(triggerType, BODY);
-                    }}
-                    onFocus={() => {
-                        this.mouseOverBody = true;
-                        this.validateMouseOver(triggerType, BODY);
-                    }}
-                >
-                    {BodyComp != null && <BodyComp {...bodyCompProps} />}
-                </div>
+                {(orientation === VERTICAL || orientation === HORIZONTAL) &&
+                    this.renderBody(bodyClassList, bodyInlineStyles, triggerType, BodyComp, bodyCompProps)}
             </section>
         );
     }
@@ -375,11 +403,13 @@ UptownDropdown.propTypes = {
     placeholder: PropTypes.string,
     centerPlaceholder: PropTypes.bool,
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
     maxWidth: PropTypes.string,
+    maxHeight: PropTypes.string,
     border: PropTypes.string,
     borderRadius: PropTypes.string,
     boxShadow: PropTypes.string,
@@ -402,11 +432,13 @@ UptownDropdown.defaultProps = {
     placeholder: 'select',
     centerPlaceholder: false,
     anime: false,
+    orientation: VERTICAL,
     calculateDimension: false,
     calculateHeight: false,
     prependIcon: false,
     flexBasis: null,
     maxWidth: null,
+    maxHeight: null,
     border: null,
     borderRadius: null,
     boxShadow: null,
