@@ -28,7 +28,6 @@ _instantiation example: dropdown_
 render(){
     const BodyComp = (props) => (
             <div className="example-expander">
-                <div>expanded: {props.expanded}</div>
                 <div>{props.message}</div>
                 <div>stuff</div>
                 <div>stuff</div>
