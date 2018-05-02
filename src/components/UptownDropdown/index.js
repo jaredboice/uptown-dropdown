@@ -60,7 +60,7 @@ class UptownDropdown extends React.Component {
         };
         this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateDimension"
         this.forceCalculateDimension = false; // see "note on forceCalculateDimension"
-        this.handleExpand = this.handleExpand.bind(this);
+        this.toggleExpandedState = this.toggleExpandedState.bind(this);
         this.validateClick = this.validateClick.bind(this);
         this.mouseOverHeader = null;
         this.mouseOverBody = null;
@@ -161,7 +161,7 @@ class UptownDropdown extends React.Component {
         };
     }
 
-    handleExpand(handleClick, state) {
+    toggleExpandedState(handleClick, state) {
         const newExpandedState = state || !this.state.expanded;
         this.setState({ expanded: newExpandedState });
         handleClick(newExpandedState);
@@ -170,7 +170,7 @@ class UptownDropdown extends React.Component {
     validateClick(state = null) {
         const { disabled, BodyComp, handleClick } = this.props;
         if (!disabled && BodyComp != null) {
-            this.handleExpand(handleClick, state);
+            this.toggleExpandedState(handleClick, state);
         }
     }
 
