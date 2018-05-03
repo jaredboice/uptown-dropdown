@@ -56,13 +56,12 @@ class UptownDropdown extends React.Component {
         super(props);
         const { expanded, mouseOutCollapseDelay } = props;
         this.state = {
-            expanded,
-            uid: this.props.uid || Symbol('uptown-dropdown')
+            expanded
         };
-        this.differentUids = false;
-        this.newUid = null;
         this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateDimension"
         this.forceCalculateDimension = false; // see "note on forceCalculateDimension"
+        this.nextUid = null; // uid ensures accurate real-time rendering when props update
+        this.divergentUids = false; // this switch alerts the component that the next uid is not the same as the prev uid and documentation
         this.toggleExpandedState = this.toggleExpandedState.bind(this);
         this.validateClick = this.validateClick.bind(this);
         this.mouseOverHeader = null;
@@ -93,7 +92,7 @@ class UptownDropdown extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.differentUids = false;
+        this.divergentUids = false;
         // note on calculateDimension
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
@@ -118,21 +117,19 @@ class UptownDropdown extends React.Component {
             quickStarterPresets = this.updateQuickStarterPresets(nextPropsObj);
             this.quickStarterPresets = { ...quickStarterPresets };
         }
-        const prevUid = this.props.uid || null;
+        const prevUid = this.props.uid || null; // TODO: destructure
         const nextUid = nextProps.uid || null;
-        console.log('prevUid: ', prevUid.toString());
-        console.log('nextUid: ', nextUid.toString())
-        if (prevUid != nextUid) {
-            console.log('yesssir!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-            this.newUid = nextProps.uid;
-            this.differentUids = true;
+        // eslint-disable-next-line eqeqeq
+        if (nextUid && nextUid != prevUid) {
+            this.nextUid = nextProps.uid;
+            this.divergentUids = true;
         } else {
             this.setState({ expanded: nextProps.expanded });
         }
     }
 
     componentDidUpdate() {
-        this.differentUids = false;
+        if (this.divergentUids) this.forceUpdate(); // eslint-disable-line react/no-did-update-set-state
         // note on calculateDimension
         if (this.renderCount === 1) {
             // eslint-disable-next-line max-len
@@ -140,6 +137,7 @@ class UptownDropdown extends React.Component {
             this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
             this.calculatedUptownBodyWidth = this.uptownBody.scrollWidth;
         }
+        this.divergentUids = false;
     }
 
     updateQuickStarterPresets(that) {
@@ -367,8 +365,6 @@ class UptownDropdown extends React.Component {
             };
         }
 
-        if (this.differentUids) this.setState({ uid: this.newUid }, () => { this.forceUpdate() });
-
         /* eslint-disable */
 
         /*
@@ -415,6 +411,7 @@ class UptownDropdown extends React.Component {
 
 UptownDropdown.propTypes = {
     name: PropTypes.string,
+    uid: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string, PropTypes.number]),
     expanded: PropTypes.bool,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
@@ -444,6 +441,7 @@ UptownDropdown.propTypes = {
 };
 UptownDropdown.defaultProps = {
     name: 'default-uptown-dropdown-name',
+    uid: null,
     expanded: false,
     disabled: false,
     placeholder: 'select',
