@@ -51,6 +51,7 @@ render(){
             <div>dude, that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
+                uid={Symbol('uptown-dropdown-render-id')}
                 expanded={false} // track in your app's state as needed
                 placeholder="uptown dropdown" // start with something simple like "select"
                 centerPlaceholder={true}
@@ -77,6 +78,7 @@ render(){
             <div>dude, that dropdown is so uptown</div>
             <UptownDropdown
                 name="my-uptown-component"
+                uid={Symbol('uptown-dropdown-render-id')}
                 expanded={false} // track in your app's state as needed
                 placeholder="uptown dropdown" // start with something simple like "select"
                 centerPlaceholder={true}
@@ -102,17 +104,22 @@ render(){
 ```javascript
 UptownDropdown.propTypes = {
     name: PropTypes.string, // becomes the name for the css pivot class,
+    uid: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string, PropTypes.number]), // unique identifier: passing a unique id on each render ensures accurate real-time rendering when props update
     expanded: PropTypes.bool, // toggle the state externally or merely provide a default initial state
     disabled: PropTypes.bool, // when false, the body will not be expandable
     placeholder: PropTypes.string, // text that will be used if HeaderComp is not provided
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__anime') || (false || '__no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
-    calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body height (or width with a future update) when expanded and apply 0 on collapse
+    orientation: PropTypes.string, // // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
+    calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
+    prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
-    maxWidth: PropTypes.string, // eg. '600px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body 
+    maxWidth: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body (on vertical orientations)
+    maxHeight: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-height of the container, the header, and the body (on horizontal orientations)
     border: PropTypes.string, // eg. '1px solid dimgray' - quick-starter setting for synchronizing the border of the header and the body 
     borderRadius: PropTypes.string, eg. // '3px' - quick-starter setting for synchronizing the border-radius of the header and the body 
     boxShadow: PropTypes.string, // eg. '3px 3px 3px 3px black' - quick-starter setting for synchronizing the box-shadow of the header and the body
+    hideHeader: PropTypes.bool, // hides the header from view so you can use the expanded prop to control the expansion/collapse state of the component without the header being rendered
     HeaderComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]), // custom header component - receives expanded and headerCompProps via props
     IconComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]), // custom icon component - receives expanded and iconCompProps via props
     BodyComp: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired, // the expandable body component - receives bodyCompProps via props
@@ -126,17 +133,22 @@ UptownDropdown.propTypes = {
 };
 UptownDropdown.defaultProps = {
     name: 'default-uptown-dropdown-name',
+    uid: null,
     expanded: false,
     disabled: false,
     placeholder: 'select',
     centerPlaceholder: false,
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
+    orientation: VERTICAL, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
+    prependIcon: false, 
     flexBasis: null,
     maxWidth: null,
+    maxHeight: null,
     border: null,
     borderRadius: null,
     boxShadow: null,
+    hideHeader: false,
     HeaderComp: null,
     IconComp: null,
     headerCompProps: {},

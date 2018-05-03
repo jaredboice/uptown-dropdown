@@ -56,8 +56,11 @@ class UptownDropdown extends React.Component {
         super(props);
         const { expanded, mouseOutCollapseDelay } = props;
         this.state = {
-            expanded
+            expanded,
+            uid: this.props.uid || Symbol('uptown-dropdown')
         };
+        this.differentUids = false;
+        this.newUid = null;
         this.renderCount = 0; // see "note on calculateDimension" (in componentDidUpdate) and "note on forceCalculateDimension"
         this.forceCalculateDimension = false; // see "note on forceCalculateDimension"
         this.toggleExpandedState = this.toggleExpandedState.bind(this);
@@ -90,6 +93,7 @@ class UptownDropdown extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        this.differentUids = false;
         // note on calculateDimension
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
@@ -114,10 +118,21 @@ class UptownDropdown extends React.Component {
             quickStarterPresets = this.updateQuickStarterPresets(nextPropsObj);
             this.quickStarterPresets = { ...quickStarterPresets };
         }
-        this.setState({ expanded: nextProps.expanded });
+        const prevUid = this.props.uid || null;
+        const nextUid = nextProps.uid || null;
+        console.log('prevUid: ', prevUid.toString());
+        console.log('nextUid: ', nextUid.toString())
+        if (prevUid != nextUid) {
+            console.log('yesssir!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            this.newUid = nextProps.uid;
+            this.differentUids = true;
+        } else {
+            this.setState({ expanded: nextProps.expanded });
+        }
     }
 
     componentDidUpdate() {
+        this.differentUids = false;
         // note on calculateDimension
         if (this.renderCount === 1) {
             // eslint-disable-next-line max-len
@@ -351,6 +366,8 @@ class UptownDropdown extends React.Component {
                 expanded
             };
         }
+
+        if (this.differentUids) this.setState({ uid: this.newUid }, () => { this.forceUpdate() });
 
         /* eslint-disable */
 
