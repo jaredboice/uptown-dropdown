@@ -74,7 +74,7 @@ class UptownDropdown extends React.Component {
     componentWillMount() {
         const theseProps = this.props;
         const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow } = this.props;
-        let quickStarterPresets;
+        let quickStarterPresets = {};
         if (flexBasis || maxWidth || maxHeight || border || borderRadius || boxShadow) {
             quickStarterPresets = this.updateQuickStarterPresets(theseProps);
         }
@@ -94,7 +94,7 @@ class UptownDropdown extends React.Component {
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
         const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = this.props;
-        let quickStarterPresets;
+        let quickStarterPresets = {};
         if (
             (nextProps.flexBasis && flexBasis != nextProps.flexBasis) || // eslint-disable-line eqeqeq
             (nextProps.maxWidth && maxWidth != nextProps.maxWidth) || // eslint-disable-line eqeqeq
