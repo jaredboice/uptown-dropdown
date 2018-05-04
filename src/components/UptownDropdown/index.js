@@ -156,31 +156,31 @@ class UptownDropdown extends React.Component {
 
     updateQuickStarterPresets(that) {
         const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = that;
-        const transientDimensionStyles = [];
+        const dimensionStyleCollection = [];
         if (flexBasis) {
-            transientDimensionStyles.push({ flexBasis: `${flexBasis}` });
+            dimensionStyleCollection.push({ flexBasis: `${flexBasis}` });
         }
         if (maxWidth && (orientation === VERTICAL || orientation === VERTICAL_REVERSE)) {
-            transientDimensionStyles.push({ maxWidth: `${maxWidth}` });
+            dimensionStyleCollection.push({ maxWidth: `${maxWidth}` });
         }
         if (maxHeight && (orientation === HORIZONTAL || orientation === HORIZONTAL_REVERSE)) {
-            transientDimensionStyles.push({ maxHeight: `${maxHeight}` });
+            dimensionStyleCollection.push({ maxHeight: `${maxHeight}` });
         }
 
-        const dimensionStyles = integrateArrayOfStyleObjects(transientDimensionStyles);
-        const transientInlineStyles = [...transientDimensionStyles];
+        const dimensionStyles = integrateArrayOfStyleObjects(dimensionStyleCollection);
+        const inlineStyleCollection = [...dimensionStyleCollection];
 
         if (border) {
-            transientInlineStyles.push({ border: `${border}` });
+            inlineStyleCollection.push({ border: `${border}` });
         }
         if (borderRadius) {
-            transientInlineStyles.push({ borderRadius: `${borderRadius}` });
+            inlineStyleCollection.push({ borderRadius: `${borderRadius}` });
         }
         if (boxShadow) {
-            transientInlineStyles.push({ boxShadow: `${boxShadow}` });
+            inlineStyleCollection.push({ boxShadow: `${boxShadow}` });
         }
-        const bodyInlineStyles = integrateArrayOfStyleObjects(transientInlineStyles);
-        const headerInlineStyles = integrateArrayOfStyleObjects(transientInlineStyles);
+        const bodyInlineStyles = integrateArrayOfStyleObjects(inlineStyleCollection);
+        const headerInlineStyles = integrateArrayOfStyleObjects(inlineStyleCollection);
         return {
             containerInlineStyles: { ...dimensionStyles },
             headerInlineStyles,
@@ -188,16 +188,16 @@ class UptownDropdown extends React.Component {
         };
     }
 
-    toggleExpandedState(handleClick, state) {
-        const newExpandedState = state || !this.state.expanded;
+    toggleExpandedState(handleClick, toggleState) {
+        const newExpandedState = toggleState || !this.state.expanded;
         this.setState({ expanded: newExpandedState });
         handleClick(newExpandedState);
     }
 
-    validateToggle(state = null) {
+    validateToggle(toggleState = null) {
         const { disabled, BodyComp, handleClick } = this.props;
         if (!disabled && BodyComp != null) {
-            this.toggleExpandedState(handleClick, state);
+            this.toggleExpandedState(handleClick, toggleState);
         }
     }
 
@@ -233,34 +233,26 @@ class UptownDropdown extends React.Component {
     validateMouseOut(triggerType, source) {
         const { expanded } = this.state;
         const { customController } = this.props;
+        const validateOnTimer = (toggleState) => {
+            clearTimeout(this.stopWatch);
+            this.stopWatch = setTimeout(() => {
+                if (!this.mouseOverHeader && !this.mouseOverBody) {
+                    this.validateToggle(toggleState);
+                }
+            }, this.mouseOutCollapseDelay);
+        };
         if (!customController) {
             if (this.triggerSource === BLUR && source === HEADER && expanded) {
                 this.validateToggle(true);
             }
             if ((this.triggerSource === BLUR || triggerType === CLICK_OR_HOVER) && expanded) {
-                // TODO: abstract this out
-                clearTimeout(this.stopWatch);
-                this.stopWatch = setTimeout(() => {
-                    if (!this.mouseOverHeader && !this.mouseOverBody) {
-                        this.validateToggle(false);
-                    }
-                }, this.mouseOutCollapseDelay);
+                validateOnTimer(false);
             }
             if (triggerType === HOVER && expanded) {
-                clearTimeout(this.stopWatch);
-                this.stopWatch = setTimeout(() => {
-                    if (!this.mouseOverHeader && !this.mouseOverBody) {
-                        this.validateToggle(false);
-                    }
-                }, this.mouseOutCollapseDelay);
+                validateOnTimer(false);
             }
             if ((triggerType === CLICK_AND_HOVER || triggerType === CLICK_OR_HOVER) && expanded) {
-                clearTimeout(this.stopWatch);
-                this.stopWatch = setTimeout(() => {
-                    if (!this.mouseOverHeader && !this.mouseOverBody) {
-                        this.validateToggle(false);
-                    }
-                }, this.mouseOutCollapseDelay);
+                validateOnTimer(false);
             }
         } else {
             // eslint-disable-next-line no-lonely-if
@@ -269,12 +261,7 @@ class UptownDropdown extends React.Component {
                 triggerType !== CLICK &&
                 expanded
             ) {
-                clearTimeout(this.stopWatch);
-                this.stopWatch = setTimeout(() => {
-                    if (!this.mouseOverHeader && !this.mouseOverBody) {
-                        this.validateToggle(false);
-                    }
-                }, this.mouseOutCollapseDelay);
+                validateOnTimer(false);
             }
         }
     }
@@ -328,6 +315,7 @@ class UptownDropdown extends React.Component {
         let bodyInlineStyles = { ...this.quickStarterPresets.bodyInlineStyles };
         let placeholderInlineStyles = {};
         let iconInlineStyles = {};
+        
         // build the header styles
 
         if (hideHeader) {
@@ -342,22 +330,16 @@ class UptownDropdown extends React.Component {
                 zIndex: -999
             };
         } else {
-            // TODO: use temporary array method with integrateArrayOfStyleObjects
+            const auxHeadingStyleCollection = [];
             if (centerPlaceholder) {
-                headerInlineStyles = {
-                    ...headerInlineStyles,
-                    textAlign: 'center'
-                };
+                auxHeadingStyleCollection.push({textAlign: 'center'});
             }
             if (linkStyles) {
-                headerInlineStyles = {
-                    ...headerInlineStyles,
-                    cursor: 'pointer',
-                    userSelect: 'none'
-                };
+                auxHeadingStyleCollection.push({cursor: 'pointer', userSelect: 'none'});
             }
+            const auxHeadingInlineStyles = integrateArrayOfStyleObjects(auxHeadingStyleCollection, headerInlineStyles);
             headerInlineStyles = {
-                ...headerInlineStyles,
+                ...auxHeadingInlineStyles,
                 ...this.quickStarterPresets.headerInlineStyles
             };
             if (prependIcon) {
@@ -508,8 +490,8 @@ UptownDropdown.propTypes = {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     centerPlaceholder: PropTypes.bool,
-    linkStyles: PropTypes.bool, // TODO: documentation
-    customController: PropTypes.bool, // TODO: documentation
+    linkStyles: PropTypes.bool,
+    customController: PropTypes.bool,
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
@@ -540,7 +522,7 @@ UptownDropdown.defaultProps = {
     disabled: false,
     placeholder: 'select',
     centerPlaceholder: false,
-    linkStyles: true,
+    linkStyles: false,
     customController: false,
     anime: false,
     orientation: VERTICAL,

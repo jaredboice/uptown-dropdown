@@ -53,8 +53,9 @@ render(){
                 name="my-uptown-component"
                 uid={Symbol('uptown-dropdown-render-id')}
                 expanded={false} // track in your app's state as needed
-                placeholder="uptown dropdown" // start with something simple like "select"
+                placeholder="what is thy bidding?" // start with something simple like "select"
                 centerPlaceholder={true}
+                linkStyles={true}
                 anime={true}
                 flexBasis="200px"
                 maxWidth="600px"
@@ -80,8 +81,9 @@ render(){
                 name="my-uptown-component"
                 uid={Symbol('uptown-dropdown-render-id')}
                 expanded={false} // track in your app's state as needed
-                placeholder="uptown dropdown" // start with something simple like "select"
+                placeholder="what is thy bidding?" // start with something simple like "select"
                 centerPlaceholder={true}
+                linkStyles={true}
                 anime={true}
                 calculateDimension={true}
                 flexBasis="200px"
@@ -109,6 +111,8 @@ UptownDropdown.propTypes = {
     disabled: PropTypes.bool, // when false, the body will not be expandable
     placeholder: PropTypes.string, // text that will be used if HeaderComp is not provided
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
+    linkStyles: PropTypes.bool, // applies link-appropriate styles to the header: { cursor: 'pointer', userSelect: 'none'}
+    customController: PropTypes.bool, // disables click events, allowing you to use your own custom click events; triggerType still applies but surrenders click events to your custom controller
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__anime') || (false || '__no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     orientation: PropTypes.string, // // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
@@ -138,6 +142,8 @@ UptownDropdown.defaultProps = {
     disabled: false,
     placeholder: 'select',
     centerPlaceholder: false,
+    linkStyles: false,
+    customController: false,
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
     orientation: VERTICAL, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
