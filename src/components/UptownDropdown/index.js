@@ -7,6 +7,10 @@ const CLICK = 'click';
 const HOVER = 'hover';
 const CLICK_AND_HOVER = 'clickAndHover';
 const CLICK_OR_HOVER = 'clickOrHover';
+const MOUSE_OVER = 'mouseOver';
+const MOUSE_OUT = 'mouseOut';
+const FOCUS = 'focus';
+const BLUR = 'blur';
 
 const HEADER = 'header';
 const BODY = 'body';
@@ -62,8 +66,10 @@ class UptownDropdown extends React.Component {
         this.forceCalculateDimension = false; // see "note on forceCalculateDimension"
         this.nextUid = null; // uid ensures accurate real-time rendering when props update
         this.divergentUids = false; // this switch alerts the component that the next uid is not the same as the prev uid and documentation
+        this.triggerSource = null; // real time tracking of clicks, mouseOvers, mouseOuts, focuses, and blurs
+        this.delayRender = false; // when in customController mode, delayRender will become true if a collapse event occurs while mouseOverHeader = true; after a short delay it will become false
         this.toggleExpandedState = this.toggleExpandedState.bind(this);
-        this.validateClick = this.validateClick.bind(this);
+        this.validateToggle = this.validateToggle.bind(this);
         this.mouseOverHeader = null;
         this.mouseOverBody = null;
         this.mouseOutCollapseDelay =
@@ -117,14 +123,22 @@ class UptownDropdown extends React.Component {
             quickStarterPresets = this.updateQuickStarterPresets(nextPropsObj);
             this.quickStarterPresets = { ...quickStarterPresets };
         }
-        const prevUid = this.props.uid || null; // TODO: destructure
+        const prevUid = this.props.uid || null;
         const nextUid = nextProps.uid || null;
         // eslint-disable-next-line eqeqeq
         if (nextUid && nextUid != prevUid) {
             this.nextUid = nextProps.uid;
             this.divergentUids = true;
         } else {
-            this.setState({ expanded: nextProps.expanded });
+            this.setState({ expanded: nextProps.expanded }, () => {
+                // when in customController mode, if there is a custom click event INSIDE the header that causes a collapse, we do not want to immediately allow a mouseOver expansion
+                if (!this.state.expanded && nextProps.customController && this.mouseOverHeader) {
+                    this.delayRender = true;
+                    setTimeout(() => {
+                        this.delayRender = false;
+                    }, 2000);
+                }
+            });
         }
     }
 
@@ -180,7 +194,7 @@ class UptownDropdown extends React.Component {
         handleClick(newExpandedState);
     }
 
-    validateClick(state = null) {
+    validateToggle(state = null) {
         const { disabled, BodyComp, handleClick } = this.props;
         if (!disabled && BodyComp != null) {
             this.toggleExpandedState(handleClick, state);
@@ -188,25 +202,80 @@ class UptownDropdown extends React.Component {
     }
 
     validateMouseOver(triggerType, source) {
-        if ((triggerType === HOVER || triggerType === CLICK_OR_HOVER) && !this.state.expanded) {
-            this.validateClick(true);
-        }
-        if (triggerType === CLICK_AND_HOVER && source === BODY && this.state.expanded) {
-            this.validateClick(true);
+        const { expanded } = this.state;
+        const { customController } = this.props;
+        if (!customController) {
+            if (this.triggerSource === FOCUS && source === HEADER && !expanded) {
+                this.validateToggle(true);
+            }
+            if (this.triggerSource === FOCUS && source === BODY && expanded) {
+                this.validateToggle(true);
+            }
+            if ((triggerType === HOVER || triggerType === CLICK_OR_HOVER) && !expanded) {
+                this.validateToggle(true);
+            }
+            if (triggerType === CLICK_AND_HOVER && source === BODY && expanded) {
+                this.validateToggle(true);
+            }
+        } else {
+            // eslint-disable-next-line no-lonely-if
+            if (
+                (this.triggerSource === MOUSE_OVER || this.triggerSource === FOCUS) &&
+                (triggerType === HOVER || triggerType === CLICK_OR_HOVER) &&
+                !expanded &&
+                !this.delayRender
+            ) {
+                this.validateToggle(true);
+            }
         }
     }
 
-    validateMouseOut(triggerType) {
-        if (triggerType === HOVER && this.state.expanded) {
-            this.validateClick(false);
-        }
-        if ((triggerType === CLICK_AND_HOVER || triggerType === CLICK_OR_HOVER) && this.state.expanded) {
-            clearTimeout(this.stopWatch);
-            this.stopWatch = setTimeout(() => {
-                if (!this.mouseOverHeader && !this.mouseOverBody) {
-                    this.validateClick(false);
-                }
-            }, this.mouseOutCollapseDelay);
+    validateMouseOut(triggerType, source) {
+        const { expanded } = this.state;
+        const { customController } = this.props;
+        if (!customController) {
+            if (this.triggerSource === BLUR && source === HEADER && expanded) {
+                this.validateToggle(true);
+            }
+            if ((this.triggerSource === BLUR || triggerType === CLICK_OR_HOVER) && expanded) {
+                // TODO: abstract this out
+                clearTimeout(this.stopWatch);
+                this.stopWatch = setTimeout(() => {
+                    if (!this.mouseOverHeader && !this.mouseOverBody) {
+                        this.validateToggle(false);
+                    }
+                }, this.mouseOutCollapseDelay);
+            }
+            if (triggerType === HOVER && expanded) {
+                clearTimeout(this.stopWatch);
+                this.stopWatch = setTimeout(() => {
+                    if (!this.mouseOverHeader && !this.mouseOverBody) {
+                        this.validateToggle(false);
+                    }
+                }, this.mouseOutCollapseDelay);
+            }
+            if ((triggerType === CLICK_AND_HOVER || triggerType === CLICK_OR_HOVER) && expanded) {
+                clearTimeout(this.stopWatch);
+                this.stopWatch = setTimeout(() => {
+                    if (!this.mouseOverHeader && !this.mouseOverBody) {
+                        this.validateToggle(false);
+                    }
+                }, this.mouseOutCollapseDelay);
+            }
+        } else {
+            // eslint-disable-next-line no-lonely-if
+            if (
+                (this.triggerSource === MOUSE_OUT || this.triggerSource === BLUR) &&
+                triggerType !== CLICK &&
+                expanded
+            ) {
+                clearTimeout(this.stopWatch);
+                this.stopWatch = setTimeout(() => {
+                    if (!this.mouseOverHeader && !this.mouseOverBody) {
+                        this.validateToggle(false);
+                    }
+                }, this.mouseOutCollapseDelay);
+            }
         }
     }
 
@@ -219,10 +288,12 @@ class UptownDropdown extends React.Component {
                 className={bodyClassList}
                 style={{ ...bodyInlineStyles }}
                 onMouseOver={() => {
+                    this.triggerSource = MOUSE_OVER;
                     this.mouseOverBody = true;
                     this.validateMouseOver(triggerType, BODY);
                 }}
                 onFocus={() => {
+                    this.triggerSource = FOCUS;
                     this.mouseOverBody = true;
                     this.validateMouseOver(triggerType, BODY);
                 }}
@@ -238,6 +309,7 @@ class UptownDropdown extends React.Component {
             disabled,
             placeholder,
             centerPlaceholder,
+            linkStyles,
             anime,
             orientation,
             prependIcon,
@@ -261,14 +333,27 @@ class UptownDropdown extends React.Component {
         if (hideHeader) {
             headerInlineStyles = {
                 visibility: 'hidden',
-                position: 'absolute',
+                position: 'relative',
+                height: 0,
+                width: 0,
+                margin: 0,
+                padding: 0,
+                border: 0,
                 zIndex: -999
             };
         } else {
+            // TODO: use temporary array method with integrateArrayOfStyleObjects
             if (centerPlaceholder) {
                 headerInlineStyles = {
                     ...headerInlineStyles,
                     textAlign: 'center'
+                };
+            }
+            if (linkStyles) {
+                headerInlineStyles = {
+                    ...headerInlineStyles,
+                    cursor: 'pointer',
+                    userSelect: 'none'
                 };
             }
             headerInlineStyles = {
@@ -329,23 +414,28 @@ class UptownDropdown extends React.Component {
         // onFocus and onBlur events must accompany onMouseOver and onMouseOut events for accessibility
         const headerAttributes = {
             onClick: () => {
-                if (triggerType !== HOVER) this.validateClick();
+                this.triggerSource = CLICK;
+                if (triggerType !== HOVER && !this.props.customController) this.validateToggle();
             },
             onMouseOver: () => {
+                this.triggerSource = MOUSE_OVER;
                 this.mouseOverHeader = true;
                 this.validateMouseOver(triggerType, HEADER);
             },
             onFocus: () => {
+                this.triggerSource = FOCUS;
                 this.mouseOverHeader = true;
                 this.validateMouseOver(triggerType, HEADER);
             },
             onMouseOut: () => {
+                this.triggerSource = MOUSE_OUT;
                 this.mouseOverHeader = false;
-                this.validateMouseOut(triggerType);
+                this.validateMouseOut(triggerType, HEADER);
             },
             onBlur: () => {
+                this.triggerSource = BLUR;
                 this.mouseOverHeader = false;
-                this.validateMouseOut(triggerType);
+                this.validateMouseOut(triggerType, HEADER);
             },
             className: headerClassList,
             style: { ...headerInlineStyles }
@@ -383,12 +473,14 @@ class UptownDropdown extends React.Component {
                 className={`uptown-${componentType}-container ${name} uptown-orientation-${orientation}`}
                 style={{ ...this.quickStarterPresets.containerInlineStyles }}
                 onMouseOut={() => {
+                    this.triggerSource = MOUSE_OUT;
                     this.mouseOverBody = false;
-                    this.validateMouseOut(triggerType);
+                    this.validateMouseOut(triggerType, HEADER);
                 }}
                 onBlur={() => {
+                    this.triggerSource = BLUR;
                     this.mouseOverBody = false;
-                    this.validateMouseOut(triggerType);
+                    this.validateMouseOut(triggerType, HEADER);
                 }}
             >
                 {(orientation === VERTICAL_REVERSE || orientation === HORIZONTAL_REVERSE) &&
@@ -416,6 +508,8 @@ UptownDropdown.propTypes = {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     centerPlaceholder: PropTypes.bool,
+    linkStyles: PropTypes.bool, // TODO: documentation
+    customController: PropTypes.bool, // TODO: documentation
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
@@ -446,6 +540,8 @@ UptownDropdown.defaultProps = {
     disabled: false,
     placeholder: 'select',
     centerPlaceholder: false,
+    linkStyles: true,
+    customController: false,
     anime: false,
     orientation: VERTICAL,
     calculateDimension: false,

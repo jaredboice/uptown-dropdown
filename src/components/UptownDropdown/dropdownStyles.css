@@ -4,8 +4,6 @@ section.uptown-dropdown-container {
 
 section.uptown-dropdown-container header {
     display: flex;
-    cursor: pointer;
-    user-select: none;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-placeholder {

@@ -11,8 +11,6 @@ section.uptown-expander-container.uptown-orientation-horizontal-reverse {
 
 section.uptown-expander-container header {
     display: flex;
-    cursor: pointer;
-    user-select: none;
 }
 
 section.uptown-expander-container header span.__uptown-expander-placeholder {

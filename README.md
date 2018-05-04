@@ -232,8 +232,6 @@ section.uptown-dropdown-container {
 
 section.uptown-dropdown-container header {
     display: flex;
-    cursor: pointer;
-    user-select: none;
 }
 
 section.uptown-dropdown-container header span.__uptown-dropdown-placeholder {
@@ -261,13 +259,13 @@ section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown
 section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 /* orientation: vertical-reverse */
@@ -284,13 +282,13 @@ section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-
 section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__anime {
     transform: scaleY(1);
     transform-origin: center bottom;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__anime {
     transform: scaleY(0);
     transform-origin: center bottom;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 /* orientation: horizontal */
@@ -308,13 +306,13 @@ section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdo
 section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__anime {
     transform: scaleX(1);
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__anime {
     transform: scaleX(0);
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 /* orientation: horizontal-reverse */
@@ -332,13 +330,13 @@ section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptow
 section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__anime {
     transform: scaleX(1);
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__anime {
     transform: scaleX(0);
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all .22s ease-out;
 }
 
 /* no anime */
@@ -368,8 +366,6 @@ section.uptown-expander-container.uptown-orientation-horizontal-reverse {
 
 section.uptown-expander-container header {
     display: flex;
-    cursor: pointer;
-    user-select: none;
 }
 
 section.uptown-expander-container header span.__uptown-expander-placeholder {
