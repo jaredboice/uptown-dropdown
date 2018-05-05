@@ -315,7 +315,7 @@ class UptownDropdown extends React.Component {
         let bodyInlineStyles = { ...this.quickStarterPresets.bodyInlineStyles };
         let placeholderInlineStyles = {};
         let iconInlineStyles = {};
-        
+
         // build the header styles
 
         if (hideHeader) {
@@ -332,10 +332,14 @@ class UptownDropdown extends React.Component {
         } else {
             const auxHeadingStyleCollection = [];
             if (centerPlaceholder) {
-                auxHeadingStyleCollection.push({textAlign: 'center'});
+                auxHeadingStyleCollection.push({ textAlign: 'center' });
             }
             if (linkStyles) {
-                auxHeadingStyleCollection.push({cursor: 'pointer', userSelect: 'none'});
+                if (!disabled) {
+                    auxHeadingStyleCollection.push({ cursor: 'pointer', userSelect: 'none' });
+                } else {
+                    auxHeadingStyleCollection.push({ cursor: 'not-allowed', userSelect: 'none' });
+                }
             }
             const auxHeadingInlineStyles = integrateArrayOfStyleObjects(auxHeadingStyleCollection, headerInlineStyles);
             headerInlineStyles = {
