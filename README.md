@@ -16,7 +16,6 @@
 
 **Import**
 
-_importing the commonly needed classes_
 ```javascript  
 import UptownDropdown from 'uptown-dropdown';
 
