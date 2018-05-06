@@ -81,9 +81,9 @@ class UptownDropdown extends React.Component {
 
     componentWillMount() {
         const theseProps = this.props;
-        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow } = this.props;
+        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow } = this.props;
         let quickStarterPresets = {};
-        if (flexBasis || maxWidth || maxHeight || border || borderRadius || boxShadow) {
+        if (flexBasis || minWidth || minHeight || maxWidth || maxHeight || border || borderRadius || boxShadow) {
             quickStarterPresets = this.updateQuickStarterPresets(theseProps);
         }
         this.quickStarterPresets = { ...quickStarterPresets };
@@ -102,10 +102,12 @@ class UptownDropdown extends React.Component {
         // note on calculateDimension
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
-        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = this.props;
+        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = this.props;
         let quickStarterPresets = {};
         if (
             (nextProps.flexBasis && flexBasis != nextProps.flexBasis) || // eslint-disable-line eqeqeq
+            (nextProps.minWidth && minWidth != nextProps.minWidth) || // eslint-disable-line eqeqeq
+            (nextProps.minHeight && minHeight != nextProps.minHeight) || // eslint-disable-line eqeqeq
             (nextProps.maxWidth && maxWidth != nextProps.maxWidth) || // eslint-disable-line eqeqeq
             (nextProps.maxHeight && maxHeight != nextProps.maxHeight) || // eslint-disable-line eqeqeq
             (nextProps.border && border != nextProps.border) || // eslint-disable-line eqeqeq
@@ -114,6 +116,8 @@ class UptownDropdown extends React.Component {
         ) {
             const nextPropsObj = {};
             if (nextProps.flexBasis) nextPropsObj.flexBasis = nextProps.flexBasis;
+            if (nextProps.minWidth) nextPropsObj.minWidth = nextProps.minWidth;
+            if (nextProps.minHeight) nextPropsObj.minHeight = nextProps.minHeight;
             if (nextProps.maxWidth) nextPropsObj.maxWidth = nextProps.maxWidth;
             if (nextProps.maxHeight) nextPropsObj.maxHeight = nextProps.maxHeight;
             if (nextProps.border) nextPropsObj.border = nextProps.border;
@@ -155,10 +159,16 @@ class UptownDropdown extends React.Component {
     }
 
     updateQuickStarterPresets(that) {
-        const { flexBasis, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = that;
+        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = that;
         const dimensionStyleCollection = [];
         if (flexBasis) {
             dimensionStyleCollection.push({ flexBasis: `${flexBasis}` });
+        }
+        if (minWidth && (orientation === VERTICAL || orientation === VERTICAL_REVERSE)) {
+            dimensionStyleCollection.push({ minWidth: `${minWidth}` });
+        }
+        if (minHeight && (orientation === HORIZONTAL || orientation === HORIZONTAL_REVERSE)) {
+            dimensionStyleCollection.push({ minHeight: `${minHeight}` });
         }
         if (maxWidth && (orientation === VERTICAL || orientation === VERTICAL_REVERSE)) {
             dimensionStyleCollection.push({ maxWidth: `${maxWidth}` });
@@ -502,7 +512,9 @@ UptownDropdown.propTypes = {
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
-    maxWidth: PropTypes.string, // add minWidth and minHeight
+    minWidth: PropTypes.string,
+    minHeight: PropTypes.string,
+    maxWidth: PropTypes.string,
     maxHeight: PropTypes.string,
     border: PropTypes.string,
     borderRadius: PropTypes.string,
@@ -534,6 +546,8 @@ UptownDropdown.defaultProps = {
     calculateHeight: false,
     prependIcon: false,
     flexBasis: null,
+    minWidth: null,
+    minHeight: null,
     maxWidth: null,
     maxHeight: null,
     border: null,

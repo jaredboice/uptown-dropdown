@@ -8,7 +8,7 @@
 
 **Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the expandable body which decouples the dropdown from a list. Uptown-Dropdown offers adjustable orientation, optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, the ability to pass custom props to custom components, and parameter injection of the expansion state to the click handler and to optional header/icon components as a key/value of props.
 
-**Select-Inject Integration:** _(click [here](https://www.npmjs.com/package/select-inject "Uptown-Dropdown") to navigate to the select-inject npm page)_
+**Select-Inject Integration:** _(click [here](https://www.npmjs.com/package/select-inject "Uptown-Dropdown") to navigate to the select-inject npm page)_  
 if you need a customizable react multi-select system, Uptown-Dropdown can be used with Select-Inject.
 
 ## Install, Import & Instantiate
@@ -117,6 +117,8 @@ UptownDropdown.propTypes = {
     calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
     prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
+    minWidth: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the min-width of the container, the header, and the body 
+    minHeight: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the min-height of the container, the header, and the body 
     maxWidth: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-width of the container, the header, and the body (on vertical orientations)
     maxHeight: PropTypes.string, // eg. '500px' - quick-starter setting for synchronizing the max-height of the container, the header, and the body (on horizontal orientations)
     border: PropTypes.string, // eg. '1px solid dimgray' - quick-starter setting for synchronizing the border of the header and the body 
@@ -148,6 +150,8 @@ UptownDropdown.defaultProps = {
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
     prependIcon: false, 
     flexBasis: null,
+    minWidth: null,
+    minHeight: null,
     maxWidth: null,
     maxHeight: null,
     border: null,
@@ -211,10 +215,12 @@ UptownDropdown.defaultProps = {
 _when provided, the following props will be applied to both the header and the body. they can then be overridden with !important styles in your css_
 
 **flexBasis** - _also gets applied to the container_  
-**maxWidth** - _also gets applied to the container_
+**minWidth** - _also gets applied to the container_  
+**minHeight** - _also gets applied to the container_  
+**maxWidth** - _also gets applied to the container_  
 **maxHeight** - _also gets applied to the container_  
-**border**  
-**borderRadius**  
+**border**    
+**borderRadius**    
 **boxShadow**  
 
 ## CSS Modification Example
