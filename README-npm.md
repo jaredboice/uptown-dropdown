@@ -159,7 +159,7 @@ UptownDropdown.defaultProps = {
     headerCompProps: {},
     iconCompProps: {},
     bodyCompProps: {},
-    handleClick: () => {},
+    handleClick: (selectInject) => {},
     triggerType: CLICK, // 'click' || 'hover' || 'clickAndHover' || 'clickOrHover' - (the preset for 'clickAndHover' basically provides an auto collapse on mouseOut)
     componentType: DROPDOWN, // 'dropdown' || 'expander'
     mouseOutCollapseDelay: MINIMUM_MOUSE_OUT_COLLAPSE_DELAY // if your provided delay time is less than the minimum (55) it will fallback to the default setting

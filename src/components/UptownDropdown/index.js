@@ -545,7 +545,7 @@ UptownDropdown.defaultProps = {
     headerCompProps: {},
     iconCompProps: {},
     bodyCompProps: {},
-    handleClick: () => {},
+    handleClick: (expandedState) => {},
     triggerType: CLICK, // 'click' || 'hover' || 'clickAndHover' || 'clickOrHover'
     componentType: DROPDOWN, // 'dropdown' || 'expander'
     mouseOutCollapseDelay: MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
