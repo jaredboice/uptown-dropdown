@@ -502,7 +502,7 @@ UptownDropdown.propTypes = {
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
-    maxWidth: PropTypes.string,
+    maxWidth: PropTypes.string, // add minWidth and minHeight
     maxHeight: PropTypes.string,
     border: PropTypes.string,
     borderRadius: PropTypes.string,
