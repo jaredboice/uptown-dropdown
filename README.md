@@ -208,7 +208,8 @@ UptownDropdown.defaultProps = {
 _when provided, the following props will be applied to both the header and the body. they can then be overridden with !important styles in your css_
 
 **flexBasis** - _also gets applied to the container_  
-**maxWidth** - _also gets applied to the container_  
+**maxWidth** - _also gets applied to the container_
+**maxHeight** - _also gets applied to the container_  
 **border**  
 **borderRadius**  
 **boxShadow**  
