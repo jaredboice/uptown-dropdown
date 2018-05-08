@@ -309,9 +309,6 @@ class UptownDropdown extends React.Component {
             linkStyles,
             anime,
             orientation,
-            calculateDimension,
-            calculateHeight,
-            calculateWidth,
             prependIcon,
             hideHeader,
             HeaderComp,
@@ -347,7 +344,7 @@ class UptownDropdown extends React.Component {
             if (centerPlaceholder) {
                 auxHeadingStyleCollection.push({ textAlign: 'center' });
             }
-            if (linkStyles || linkStyle) {
+            if (linkStyles) {
                 if (!disabled) {
                     auxHeadingStyleCollection.push({ cursor: 'pointer', userSelect: 'none' });
                 } else {
@@ -392,9 +389,9 @@ class UptownDropdown extends React.Component {
         } else {
             animeStateClass = anime;
         }
-        // calculateDimension and calculateHeight/calculateWidth are synonymous
+        // calculateDimension and calculateHeight are synonymous
         // eslint-disable-next-line eqeqeq
-        if ((calculateDimension || calculateHeight || calculateWidth) && (anime != false && anime != NO_ANIME)) {
+        if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != NO_ANIME)) {
             if (orientation === VERTICAL || orientation === VERTICAL_REVERSE) {
                 bodyInlineStyles = expanded
                     ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
@@ -512,8 +509,7 @@ UptownDropdown.propTypes = {
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
-    calculateHeight: PropTypes.bool, // alias for calculateDimension
-    calculateWidth: PropTypes.bool, // alias for calculateDimension
+    calculateHeight: PropTypes.bool, // synonymous with calculateDimension
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
     minWidth: PropTypes.string,
@@ -548,7 +544,6 @@ UptownDropdown.defaultProps = {
     orientation: VERTICAL,
     calculateDimension: false,
     calculateHeight: false,
-    calculateWidth: false,
     prependIcon: false,
     flexBasis: null,
     minWidth: null,
