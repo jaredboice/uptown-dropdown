@@ -18,8 +18,8 @@ const BODY = 'body';
 const DROPDOWN = 'dropdown';
 const EXPANDER = 'expander'; // eslint-disable-line no-unused-vars
 
-const ANIME = '__uptown-anime';
-const NO_ANIME = '__uptown-no-anime';
+const ANIME = '__anime';
+const NO_ANIME = '__no-anime';
 
 const VERTICAL = 'vertical';
 const VERTICAL_REVERSE = 'vertical-reverse';
