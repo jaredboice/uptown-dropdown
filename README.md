@@ -174,7 +174,7 @@ UptownDropdown.defaultProps = {
 
 **container**
 
-*   `uptown-${componentType} ${name}`
+*   `uptown-${componentType}-container ${name}`
 
 **HeaderComp/placeholder**
 
