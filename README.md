@@ -201,8 +201,8 @@ UptownDropdown.defaultProps = {
 
 **animeStateClass** _(applied on the body)_
 
-*   '\_\_anime'
-*   '\_\_no-anime'
+*   '\_\_uptown-anime'
+*   '\_\_uptown-no-anime'
 *   'any-custom-class-name'
 
 **class list integration**
