@@ -107,7 +107,7 @@ UptownDropdown.propTypes = {
     name: PropTypes.string, // becomes the name for the css pivot class,
     uid: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string, PropTypes.number]), // unique identifier: passing a unique id on each render ensures accurate real-time rendering when props update
     expanded: PropTypes.bool, // toggle the state externally or merely provide a default initial state
-    disabled: PropTypes.bool, // when false, the body will not be expandable
+    disabled: PropTypes.bool, // when true, the body will not be expandable
     placeholder: PropTypes.string, // text that will be used if HeaderComp is not provided
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     linkStyles: PropTypes.bool, // applies link-appropriate styles to the header: eg. { cursor: 'pointer', userSelect: 'none'}
