@@ -418,7 +418,7 @@ class UptownDropdown extends React.Component {
             } else {
                 animeStateClass = `${animeStateClass} ${NON_CALCULATED_DIMENSION_ANIME}`;
             } // the conditional below defaults the default built-in animation for DROPDOWN to maintainOpacityOnAnime = true
-            if (maintainOpacityOnAnime === true || (maintainOpacityOnAnime == null && componentType === DROPDOWN)) {
+            if (maintainOpacityOnAnime === true || (maintainOpacityOnAnime == null && componentType === DROPDOWN && !calculateDimension)) {
                 animeStateClass = `${animeStateClass} ${MAINTAIN_OPACITY}`;
             } else if (maintainOpacityOnAnime === false) {
                 animeStateClass = `${animeStateClass} ${FADE_OPACITY}`;
