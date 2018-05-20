@@ -48,6 +48,7 @@ render(){
     };
 
     const bodyCompProps = { message: 'hello world' }; // strange example but you get the point
+    // add calculateDimension={true} to apply height animation instead of a scale transformation - if you are applying borders set maintainOpacityOnAnime={false} 
     return (
         <section>
             <div>dude, that dropdown is so uptown</div>
@@ -59,6 +60,7 @@ render(){
                 centerPlaceholder={true}
                 linkStyles={true}
                 anime={true}
+                maintainOpacityOnAnime={true} // false by default - but if you don't have calculateDimension={true} or  you don't have an attribute such as a border that is still visible on collapse, it is more aesthetic to set this to true
                 flexBasis="200px"
                 maxWidth="600px"
                 border="1px solid dimgray"
@@ -87,7 +89,8 @@ render(){
                 centerPlaceholder={true}
                 linkStyles={true}
                 anime={true}
-                calculateDimension={true}
+                calculateDimension={true} // required for built-in animation for componentType={expander}
+                maintainOpacityOnAnime={false}
                 flexBasis="200px"
                 maxWidth="600px"
                 border="1px solid dimgray"
@@ -117,7 +120,8 @@ UptownDropdown.propTypes = {
     customController: PropTypes.bool, // disables click events, allowing you to use your own custom click events; triggerType still applies but surrenders click events to your custom controller
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__uptown-anime') || (false || '__uptown-no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     orientation: PropTypes.string, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
-    calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
+    calculateDimension: PropTypes.bool, // when true (and when anime has a truthy/custom value), uptown-dropdown will calculate and apply the body max-height/max-width (vertical/horizontal) when expanded and apply 0 on collapse
+    maintainOpacityOnAnime: PropTypes.bool, // when true, opacity will not fade on collapse - false by default for scenarios such as applied borders still visible on collapse
     prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
     minWidth: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the min-width of the container, the header, and the body 
@@ -151,6 +155,7 @@ UptownDropdown.defaultProps = {
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
     orientation: VERTICAL, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
+    maintainOpacityOnAnime: null,
     prependIcon: false, 
     minWidth: null,
     minHeight: null,

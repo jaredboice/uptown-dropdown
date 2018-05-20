@@ -31,13 +31,11 @@ section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander
 }
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
@@ -49,13 +47,11 @@ section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-
 }
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
@@ -67,13 +63,11 @@ section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expand
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
@@ -85,16 +79,31 @@ section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptow
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
+
+section .__uptown-expander-expand.__uptown-anime.__uptown-fade-opacity {
+    opacity: 1;
+}
+
+section .__uptown-expander-collapse.__uptown-anime.__uptown-fade-opacity {
+    opacity: 0;
+}
+
+section .__uptown-expander-expand.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
+}
+
+section .__uptown-expander-collapse.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
+}
+
 /* no anime */
 
 section.uptown-expander-container .__uptown-expander-expand.__uptown-no-anime {

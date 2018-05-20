@@ -20,6 +20,10 @@ const EXPANDER = 'expander'; // eslint-disable-line no-unused-vars
 
 const ANIME = '__uptown-anime';
 const NO_ANIME = '__uptown-no-anime';
+const CALCULATED_DIMENSION_ANIME = '__uptown-calculated-dimension-anime';
+const NON_CALCULATED_DIMENSION_ANIME = '__uptown-non-calculated-dimension-anime';
+const MAINTAIN_OPACITY = '__uptown-maintain-opacity';
+const FADE_OPACITY = '__uptown-fade-opacity';
 
 const VERTICAL = 'vertical';
 const VERTICAL_REVERSE = 'vertical-reverse';
@@ -91,7 +95,7 @@ class UptownDropdown extends React.Component {
 
     componentDidMount() {
         this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
-        this.calculatedUptownBodyWidth = this.uptownBody.offsetWidth;
+        this.calculatedUptownBodyWidth = this.uptownBody.scrollWidth;
         if (this.renderCount === 1 && this.forceCalculateDimension) {
             this.forceUpdate();
         }
@@ -102,7 +106,17 @@ class UptownDropdown extends React.Component {
         // note on calculateDimension
         // eslint-disable-next-line max-len
         this.renderCount = 0; // when renderCount === 1 then the DOM has mounted the new body and we can calculate its height for animation purposes (for when props.calculateDimension is true)
-        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = this.props;
+        const {
+            flexBasis,
+            minWidth,
+            minHeight,
+            maxWidth,
+            maxHeight,
+            border,
+            borderRadius,
+            boxShadow,
+            orientation
+        } = this.props;
         let quickStarterPresets = {};
         if (
             (nextProps.flexBasis && flexBasis != nextProps.flexBasis) || // eslint-disable-line eqeqeq
@@ -159,7 +173,17 @@ class UptownDropdown extends React.Component {
     }
 
     updateQuickStarterPresets(that) {
-        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow, orientation } = that;
+        const {
+            flexBasis,
+            minWidth,
+            minHeight,
+            maxWidth,
+            maxHeight,
+            border,
+            borderRadius,
+            boxShadow,
+            orientation
+        } = that;
         const dimensionStyleCollection = [];
         if (flexBasis) {
             dimensionStyleCollection.push({ flexBasis: `${flexBasis}` });
@@ -309,6 +333,9 @@ class UptownDropdown extends React.Component {
             linkStyles,
             anime,
             orientation,
+            calculateDimension,
+            calculateHeight,
+            maintainOpacityOnAnime,
             prependIcon,
             hideHeader,
             HeaderComp,
@@ -386,12 +413,32 @@ class UptownDropdown extends React.Component {
             animeStateClass = NO_ANIME;
         } else if (anime === true) {
             animeStateClass = ANIME;
+            if (calculateDimension || calculateHeight) {
+                animeStateClass = `${animeStateClass} ${CALCULATED_DIMENSION_ANIME}`;
+            } else {
+                animeStateClass = `${animeStateClass} ${NON_CALCULATED_DIMENSION_ANIME}`;
+            } // the conditional below defaults the default built-in animation for DROPDOWN to maintainOpacityOnAnime = true
+            if (maintainOpacityOnAnime === true || (maintainOpacityOnAnime == null && componentType === DROPDOWN)) {
+                animeStateClass = `${animeStateClass} ${MAINTAIN_OPACITY}`;
+            } else if (maintainOpacityOnAnime === false) {
+                animeStateClass = `${animeStateClass} ${FADE_OPACITY}`;
+            }
         } else {
             animeStateClass = anime;
+            if (calculateDimension || calculateHeight) {
+                animeStateClass = `${animeStateClass} ${CALCULATED_DIMENSION_ANIME}`;
+            } else {
+                animeStateClass = `${animeStateClass} ${NON_CALCULATED_DIMENSION_ANIME}`;
+            }
+            if (maintainOpacityOnAnime === true) {
+                animeStateClass = `${animeStateClass} ${MAINTAIN_OPACITY}`;
+            } else if (maintainOpacityOnAnime === false) {
+                animeStateClass = `${animeStateClass} ${FADE_OPACITY}`;
+            }
         }
         // calculateDimension and calculateHeight are synonymous
         // eslint-disable-next-line eqeqeq
-        if ((this.props.calculateDimension || this.props.calculateHeight) && (anime != false && anime != NO_ANIME)) {
+        if ((calculateDimension || calculateHeight) && (anime != false && anime != NO_ANIME)) {
             if (orientation === VERTICAL || orientation === VERTICAL_REVERSE) {
                 bodyInlineStyles = expanded
                     ? { ...bodyInlineStyles, maxHeight: `${this.calculatedUptownBodyHeight}px` }
@@ -510,6 +557,7 @@ UptownDropdown.propTypes = {
     orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
+    maintainOpacityOnAnime: PropTypes.bool, // TODO: documentation
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
     minWidth: PropTypes.string,
@@ -544,6 +592,7 @@ UptownDropdown.defaultProps = {
     orientation: VERTICAL,
     calculateDimension: false,
     calculateHeight: false,
+    maintainOpacityOnAnime: null,
     prependIcon: false,
     flexBasis: null,
     minWidth: null,

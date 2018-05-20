@@ -47,6 +47,7 @@ render(){
     };
 
     const bodyCompProps = { message: 'hello world' }; // strange example but you get the point
+    // add calculateDimension={true} to apply height animation instead of a scale transformation - if you are applying borders set maintainOpacityOnAnime={false} 
     return (
         <section>
             <div>dude, that dropdown is so uptown</div>
@@ -58,6 +59,7 @@ render(){
                 centerPlaceholder={true}
                 linkStyles={true}
                 anime={true}
+                maintainOpacityOnAnime={false} // false by default - but if you don't have calculateDimension={true} or  you don't have an attribute such as a border that is still visible on collapse, it is more aesthetic to set this to true
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
@@ -85,7 +87,8 @@ _instantiation example: expander_
                 centerPlaceholder={true}
                 linkStyles={true}
                 anime={true}
-                calculateDimension={true}
+                calculateDimension={true} // required for built-in animation for componentType={expander}
+                maintainOpacityOnAnime={false}
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
@@ -114,7 +117,8 @@ UptownDropdown.propTypes = {
     customController: PropTypes.bool, // disables click events, allowing you to use your own custom click events; triggerType still applies but surrenders click events to your custom controller
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__uptown-anime') || (false || '__uptown-no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     orientation: PropTypes.string, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
-    calculateDimension: PropTypes.bool, // when true (and when anime is true), during animations uptown-dropdown will calculate and apply the body max-height when expanded and apply 0 on collapse
+    calculateDimension: PropTypes.bool, // when true (and when anime has a truthy/custom value), uptown-dropdown will calculate and apply the body max-height/max-width (vertical/horizontal) when expanded and apply 0 on collapse
+    maintainOpacityOnAnime: PropTypes.bool, // when true, opacity will not fade on collapse - false by default for scenarios such as applied borders still visible on collapse
     prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
     minWidth: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the min-width of the container, the header, and the body 
@@ -148,6 +152,7 @@ UptownDropdown.defaultProps = {
     anime: false, // when true, uptown-dropdown provides built-in animation (calculateDimension is required for componentType = "expander")
     orientation: VERTICAL, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
+    maintainOpacityOnAnime: null,
     prependIcon: false, 
     flexBasis: null,
     minWidth: null,
@@ -271,16 +276,26 @@ section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown
     overflow: hidden;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(1);
     transform-origin: center top;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(0);
     transform-origin: center top;
     transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: center top;
+    transition: all 0.22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: center top;
+    transition: all 0.22s ease-out;
 }
 
 /* orientation: vertical-reverse */
@@ -294,16 +309,26 @@ section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-
     overflow: hidden;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(1);
     transform-origin: center bottom;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(0);
     transform-origin: center bottom;
     transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: center top;
+    transition: all 0.22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: center bottom;
+    transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal */
@@ -318,16 +343,26 @@ section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdo
     white-space: nowrap;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(1);
     transform-origin: left center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(0);
     transform-origin: left center;
     transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: left center;
+    transition: all 0.22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: left center;
+    transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal-reverse */
@@ -342,16 +377,42 @@ section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptow
     white-space: nowrap;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(1);
     transform-origin: right center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime {
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(0);
     transform-origin: right center;
     transition: all .22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: right center;
+    transition: all 0.22s ease-out;
+}
+
+section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+    transform-origin: right center;
+    transition: all 0.22s ease-out;
+}
+
+section .__uptown-dropdown-expand.__uptown-anime.__uptown-fade-opacity {
+    opacity: 1;
+}
+
+section .__uptown-dropdown-collapse.__uptown-anime.__uptown-fade-opacity {
+    opacity: 0;
+}
+
+section .__uptown-dropdown-expand.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
+}
+
+section .__uptown-dropdown-collapse.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
 }
 
 /* no anime */
@@ -401,13 +462,11 @@ section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander
 }
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
@@ -419,13 +478,11 @@ section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-
 }
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
@@ -437,13 +494,11 @@ section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expand
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
@@ -455,16 +510,31 @@ section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptow
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
-    opacity: 1;
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
-    opacity: 0;
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
+
+section .__uptown-expander-expand.__uptown-anime.__uptown-fade-opacity {
+    opacity: 1;
+}
+
+section .__uptown-expander-collapse.__uptown-anime.__uptown-fade-opacity {
+    opacity: 0;
+}
+
+section .__uptown-expander-expand.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
+}
+
+section .__uptown-expander-collapse.__uptown-anime.__uptown-maintain-opacity {
+    opacity: 1;
+}
+
 /* no anime */
 
 section.uptown-expander-container .__uptown-expander-expand.__uptown-no-anime {
