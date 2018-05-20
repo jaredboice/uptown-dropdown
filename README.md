@@ -265,7 +265,7 @@ section.uptown-dropdown-container header span.__uptown-dropdown-icon {
 
 /* orientation: vertical */
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-body {
+section.uptown-dropdown-container.__uptown-orientation-vertical .__uptown-dropdown-body {
     position: absolute;
     top: 100%;
     width: 100%;
@@ -274,31 +274,31 @@ section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown
     overflow: hidden;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(1);
     transform-origin: center top;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(0);
     transform-origin: center top;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: vertical-reverse */
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-body {
+section.uptown-dropdown-container.__uptown-orientation-vertical-reverse .__uptown-dropdown-body {
     position: absolute;
     bottom: 100%;
     width: 100%;
@@ -307,31 +307,31 @@ section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-
     overflow: hidden;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(1);
     transform-origin: center bottom;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleY(0);
     transform-origin: center bottom;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal */
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-body {
+section.uptown-dropdown-container.__uptown-orientation-horizontal .__uptown-dropdown-body {
     position: absolute;
     left: 100%;
     top: 0%;
@@ -341,31 +341,31 @@ section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdo
     white-space: nowrap;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(1);
     transform-origin: left center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(0);
     transform-origin: left center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal-reverse */
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-body {
+section.uptown-dropdown-container.__uptown-orientation-horizontal-reverse .__uptown-dropdown-body {
     position: absolute;
     right: 100%;
     top: 0%;
@@ -375,24 +375,24 @@ section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptow
     white-space: nowrap;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(1);
     transform-origin: right center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-non-calculated-dimension-anime {
     transform: scaleX(0);
     transform-origin: right center;
     transition: all .22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
+section.uptown-dropdown-container.__uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
@@ -429,11 +429,11 @@ section.uptown-dropdown-container .__uptown-dropdown-collapse.__uptown-no-anime 
 ```css
 /* begin container orientation styles */
 
-section.uptown-expander-container.uptown-orientation-horizontal {
+section.uptown-expander-container.__uptown-orientation-horizontal {
     display: flex;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal-reverse {
+section.uptown-expander-container.__uptown-orientation-horizontal-reverse {
     display: flex;
 }
 /* end container orientation styles */
@@ -455,64 +455,64 @@ section.uptown-expander-container header span.__uptown-expander-icon {
 
 /* orientation: vertical */
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-body {
+section.uptown-expander-container.__uptown-orientation-vertical .__uptown-expander-body {
     overflow: hidden;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
     transform-origin: center top;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: vertical-reverse */
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-body {
+section.uptown-expander-container.__uptown-orientation-vertical-reverse .__uptown-expander-body {
     overflow: hidden;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
     transform-origin: center bottom;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal */
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-body {
+section.uptown-expander-container.__uptown-orientation-horizontal .__uptown-expander-body {
     overflow: hidden;
     white-space: nowrap;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
     transform-origin: left center;
     transition: all 0.22s ease-out;
 }
 
 /* orientation: horizontal-reverse */
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-body {
+section.uptown-expander-container.__uptown-orientation-horizontal-reverse .__uptown-expander-body {
     overflow: hidden;
     white-space: nowrap;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.__uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
     transform-origin: right center;
     transition: all 0.22s ease-out;
 }
@@ -547,7 +547,7 @@ section.uptown-expander-container .__uptown-expander-collapse.__uptown-no-anime 
 **jsx structure**
 
 ```javascript
-<section className={`uptown-${componentType}-container ${name} uptown-orientation-${orientation}`}>
+<section className={`uptown-${componentType}-container ${name} __uptown-orientation-${orientation}`}>
     {(orientation === VERTICAL_REVERSE || orientation === HORIZONTAL_REVERSE) && <div className={bodyClassList}>}
     <header className={headerClassList}>
         <span className={`__uptown-${componentType}-placeholder`}>
