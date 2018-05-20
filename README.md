@@ -59,7 +59,6 @@ render(){
                 centerPlaceholder={true}
                 linkStyles={true}
                 anime={true}
-                maintainOpacityOnAnime={false} // false by default - but if you don't have calculateDimension={true} or  you don't have an attribute such as a border that is still visible on collapse, it is more aesthetic to set this to true
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
@@ -88,7 +87,6 @@ _instantiation example: expander_
                 linkStyles={true}
                 anime={true}
                 calculateDimension={true} // required for built-in animation for componentType={expander}
-                maintainOpacityOnAnime={false}
                 maxWidth="600px"
                 border="1px solid dimgray"
                 borderRadius="3px"
@@ -118,7 +116,7 @@ UptownDropdown.propTypes = {
     anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__uptown-anime') || (false || '__uptown-no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     orientation: PropTypes.string, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: PropTypes.bool, // when true (and when anime has a truthy/custom value), uptown-dropdown will calculate and apply the body max-height/max-width (vertical/horizontal) when expanded and apply 0 on collapse
-    maintainOpacityOnAnime: PropTypes.bool, // when true, opacity will not fade on collapse - false by default for scenarios such as applied borders still visible on collapse
+    maintainOpacityOnAnime: PropTypes.bool, // when false, opacity will fade on collapse - when true, opacity will not fade on collapse
     prependIcon: PropTypes.bool, // prepends the optionally provided icon before the placeholder (it is appended after the placeholder by default)
     flexBasis: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the flex-basis of the container, the header, and the body 
     minWidth: PropTypes.string, // eg. '200px' - quick-starter setting for synchronizing the min-width of the container, the header, and the body 

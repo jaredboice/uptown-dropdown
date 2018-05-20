@@ -337,6 +337,7 @@ class UptownDropdown extends React.Component {
             calculateHeight,
             maintainOpacityOnAnime,
             prependIcon,
+            border,
             hideHeader,
             HeaderComp,
             BodyComp,
@@ -411,16 +412,19 @@ class UptownDropdown extends React.Component {
         let animeStateClass;
         if (!anime) {
             animeStateClass = NO_ANIME;
-        } else if (anime === true) {
+        } else if (anime === true || anime === ANIME) {
             animeStateClass = ANIME;
             if (calculateDimension || calculateHeight) {
                 animeStateClass = `${animeStateClass} ${CALCULATED_DIMENSION_ANIME}`;
             } else {
                 animeStateClass = `${animeStateClass} ${NON_CALCULATED_DIMENSION_ANIME}`;
             } // the conditional below defaults the default built-in animation for DROPDOWN to maintainOpacityOnAnime = true
-            if (maintainOpacityOnAnime === true || (maintainOpacityOnAnime == null && componentType === DROPDOWN && !calculateDimension)) {
+            if (
+                maintainOpacityOnAnime === true ||
+                (maintainOpacityOnAnime == null && componentType === DROPDOWN && !calculateDimension)
+            ) {
                 animeStateClass = `${animeStateClass} ${MAINTAIN_OPACITY}`;
-            } else if (maintainOpacityOnAnime === false) {
+            } else if (maintainOpacityOnAnime === false || (maintainOpacityOnAnime == null && border && calculateDimension)) {
                 animeStateClass = `${animeStateClass} ${FADE_OPACITY}`;
             }
         } else {
@@ -448,7 +452,6 @@ class UptownDropdown extends React.Component {
                     ? { ...bodyInlineStyles, maxWidth: `${this.calculatedUptownBodyWidth}px` }
                     : { ...bodyInlineStyles, maxWidth: 0 };
             }
-
             this.forceCalculateDimension = true;
         }
         // class list integration
@@ -557,7 +560,7 @@ UptownDropdown.propTypes = {
     orientation: PropTypes.string,
     calculateDimension: PropTypes.bool,
     calculateHeight: PropTypes.bool, // synonymous with calculateDimension
-    maintainOpacityOnAnime: PropTypes.bool, // TODO: documentation
+    maintainOpacityOnAnime: PropTypes.bool,
     prependIcon: PropTypes.bool,
     flexBasis: PropTypes.string,
     minWidth: PropTypes.string,
