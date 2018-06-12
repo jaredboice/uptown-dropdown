@@ -101,7 +101,7 @@ class UptownDropdown extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.divergentUids = false;
         // note on calculateDimension
         // eslint-disable-next-line max-len
@@ -552,7 +552,7 @@ UptownDropdown.propTypes = {
     uid: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string, PropTypes.number]),
     expanded: PropTypes.bool,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     centerPlaceholder: PropTypes.bool,
     linkStyles: PropTypes.bool,
     customController: PropTypes.bool,

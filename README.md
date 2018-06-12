@@ -4,6 +4,8 @@
 
 ![List-Runner](screenshots/uptown-dropdown-logo.png 'uptown-dropdown')
 
+## Donations - Bitcoin: 19XgiRojJnv9VDhyW9HmF6oKQeVc7k9McU (use this address until 2020)
+
 ## Description
 
 **Uptown-Dropdown** is a fully customizable _react_ _dropdown_ implementation that doubles as an _expander_. It accepts a header component or a placeholder, an optional icon, and a single component for the expandable body which decouples the dropdown from a list. Uptown-Dropdown offers adjustable orientation, optional built-in animation, applied css class names for each state of the component, switches for disabling the component and externally toggling expand/collapse states, multiple trigger types including click and hover, the ability to pass custom props to custom components, and parameter injection of the expansion state to the click handler and to optional header/icon components as a key/value of props.
@@ -109,7 +111,7 @@ UptownDropdown.propTypes = {
     uid: PropTypes.oneOfType([PropTypes.symbol, PropTypes.string, PropTypes.number]), // unique identifier: passing a unique id on each render ensures accurate real-time rendering when props update
     expanded: PropTypes.bool, // toggle the state externally or merely provide a default initial state
     disabled: PropTypes.bool, // when true, the body will not be expandable
-    placeholder: PropTypes.string, // text that will be used if HeaderComp is not provided
+    placeholder: PropTypes.oneOfType([PropTypes.element, PropTypes.string]), // text || <span>some jsx</span> that will be used if HeaderComp is not provided
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     linkStyles: PropTypes.bool, // applies link-appropriate styles to the header: eg. { cursor: 'pointer', userSelect: 'none'}
     customController: PropTypes.bool, // disables click events, allowing you to use your own custom click events; triggerType still applies but surrenders click events to your custom controller
@@ -152,12 +154,12 @@ UptownDropdown.defaultProps = {
     calculateDimension: false, // required to be true for built-in animation of componentType = 'expander' (anime needs to be true as well)
     maintainOpacityOnAnime: null,
     prependIcon: false, 
-    flexBasis: null,
-    minWidth: null,
+    flexBasis: null, 
+    minWidth: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
     minHeight: null,
-    maxWidth: null,
+    maxWidth: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
     maxHeight: null,
-    border: null,
+    border: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
     borderRadius: null,
     boxShadow: null,
     hideHeader: false,
