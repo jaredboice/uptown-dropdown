@@ -62,7 +62,18 @@ const integrateArrayOfStyleObjects = (arrayOfStyleObjects, inlineStyles = {}) =>
 class UptownDropdown extends React.Component {
     constructor(props) {
         super(props);
-        const { expanded, mouseOutCollapseDelay } = props;
+        const {
+            expanded,
+            mouseOutCollapseDelay,
+            flexBasis,
+            minWidth,
+            minHeight,
+            maxWidth,
+            maxHeight,
+            border,
+            borderRadius,
+            boxShadow
+        } = props;
         this.state = {
             expanded
         };
@@ -81,12 +92,8 @@ class UptownDropdown extends React.Component {
                 ? MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
                 : mouseOutCollapseDelay;
         this.stopWatch = setTimeout(() => {}, this.mouseOutCollapseDelay);
-    }
-
-    componentWillMount() {
-        const theseProps = this.props;
-        const { flexBasis, minWidth, minHeight, maxWidth, maxHeight, border, borderRadius, boxShadow } = this.props;
         let quickStarterPresets = {};
+        const theseProps = this.props;
         if (flexBasis || minWidth || minHeight || maxWidth || maxHeight || border || borderRadius || boxShadow) {
             quickStarterPresets = this.updateQuickStarterPresets(theseProps);
         }
@@ -424,7 +431,10 @@ class UptownDropdown extends React.Component {
                 (maintainOpacityOnAnime == null && componentType === DROPDOWN && !calculateDimension)
             ) {
                 animeStateClass = `${animeStateClass} ${MAINTAIN_OPACITY}`;
-            } else if (maintainOpacityOnAnime === false || (maintainOpacityOnAnime == null && border && calculateDimension)) {
+            } else if (
+                maintainOpacityOnAnime === false ||
+                (maintainOpacityOnAnime == null && border && calculateDimension)
+            ) {
                 animeStateClass = `${animeStateClass} ${FADE_OPACITY}`;
             }
         } else {

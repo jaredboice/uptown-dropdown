@@ -155,11 +155,11 @@ UptownDropdown.defaultProps = {
     maintainOpacityOnAnime: null,
     prependIcon: false, 
     flexBasis: null, 
-    minWidth: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
+    minWidth: null, // note: you will want to manually add border and (minWidth || maxWidth || minHeight || maxHeight) in your css when applying these styles together (due to dimension added by borders)
     minHeight: null,
-    maxWidth: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
+    maxWidth: null, // note: you will want to manually add border and (minWidth || maxWidth || minHeight || maxHeight) in your css when applying these styles together (due to dimension added by borders)
     maxHeight: null,
-    border: null, // note: you will want to manually add border and (min-width || max-width) in your css when applying these styles together
+    border: null, // note: you will want to manually add border and (minWidth || maxWidth || minHeight || maxHeight) in your css when applying these styles together (due to dimension added by borders)
     borderRadius: null,
     boxShadow: null,
     hideHeader: false,
