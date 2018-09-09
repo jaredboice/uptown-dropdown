@@ -5,7 +5,7 @@
     "email": "jaredboice@gmail.com"
   },
   "description": "a fully customizable react dropdown/expander implementation that accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list",
-  "version": "2.6.14",
+  "version": "2.6.25",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -50,7 +50,6 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^8.2.3",
-    "babel-preset-stage-1": "^6.24.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",

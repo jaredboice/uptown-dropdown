@@ -526,7 +526,7 @@ class UptownDropdown extends React.Component {
         this.renderCount++;
         return (
             <section
-                className={`uptown-${componentType}-container __uptown-orientation-${orientation} ${name} `}
+                className={`uptown-${componentType}-container uptown-orientation-${orientation} ${name} `}
                 style={{ ...this.quickStarterPresets.containerInlineStyles }}
                 onMouseOut={() => {
                     this.triggerSource = MOUSE_OUT;
