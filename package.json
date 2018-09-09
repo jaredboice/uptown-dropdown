@@ -5,7 +5,7 @@
     "email": "jaredboice@gmail.com"
   },
   "description": "a fully customizable react dropdown/expander implementation that accepts a header component or a placeholder, an optional icon, and a single component for the body which decouples the dropdown from a list",
-  "version": "2.6.13",
+  "version": "2.6.14",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -41,14 +41,12 @@
     "test:c": "NODE_PATH=src jest --verbose --coverage"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^8.2.3",
