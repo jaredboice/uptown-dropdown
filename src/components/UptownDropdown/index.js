@@ -104,8 +104,8 @@ class UptownDropdown extends React.Component {
         // the following code block will prevent unit test strategies from failing when those strategies don't recognize refs
         if (typeof this.uptownBody === 'undefined' || this.uptownBody == null) {
             this.uptownBody = {
-                scrollHeight: null,
-                scrollWidth: null
+                scrollHeight: 0,
+                scrollWidth: 0
             };
         }
         this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
