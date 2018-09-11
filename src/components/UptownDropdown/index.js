@@ -101,6 +101,13 @@ class UptownDropdown extends React.Component {
     }
 
     componentDidMount() {
+        // the following block prevents unit test strategies from failing when those strategies don't recognize refs
+        if (!this.uptownBody) {
+            this.uptownBody = {
+                scrollHeight: null,
+                scrollWidth: null
+            };
+        }
         this.calculatedUptownBodyHeight = this.uptownBody.scrollHeight;
         this.calculatedUptownBodyWidth = this.uptownBody.scrollWidth;
         if (this.renderCount === 1 && this.forceCalculateDimension) {
@@ -108,6 +115,7 @@ class UptownDropdown extends React.Component {
         }
     }
 
+    // eslint-disable-next-line camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
         this.divergentUids = false;
         // note on calculateDimension
@@ -621,7 +629,7 @@ UptownDropdown.defaultProps = {
     headerCompProps: {},
     iconCompProps: {},
     bodyCompProps: {},
-    handleClick: (expandedState) => {},
+    handleClick: (expandedState) => {}, // eslint-disable-line no-unused-vars
     triggerType: CLICK, // 'click' || 'hover' || 'clickAndHover' || 'clickOrHover'
     componentType: DROPDOWN, // 'dropdown' || 'expander'
     mouseOutCollapseDelay: MINIMUM_MOUSE_OUT_COLLAPSE_DELAY
