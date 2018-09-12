@@ -290,12 +290,12 @@ section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown
 
 section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-vertical .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: vertical-reverse */
@@ -323,12 +323,12 @@ section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-
 
 section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-vertical-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: center bottom;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal */
@@ -357,12 +357,12 @@ section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdo
 
 section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-horizontal .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal-reverse */
@@ -391,12 +391,12 @@ section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptow
 
 section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-expand.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-dropdown-container.uptown-orientation-horizontal-reverse .__uptown-dropdown-collapse.__uptown-anime.__uptown-calculated-dimension-anime {
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section .__uptown-dropdown-expand.__uptown-anime.__uptown-fade-opacity {
@@ -463,12 +463,12 @@ section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
     transform-origin: center top;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: vertical-reverse */
@@ -479,12 +479,12 @@ section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
     transform-origin: center bottom;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
     transform-origin: center bottom;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal */
@@ -495,12 +495,12 @@ section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expand
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
     transform-origin: left center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal-reverse */
@@ -511,12 +511,12 @@ section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptow
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
     transform-origin: right center;
-    transition: all 0.22s ease-out;
+    transition: all 0.20s ease-out;
 }
 
 section .__uptown-expander-expand.__uptown-anime.__uptown-fade-opacity {
