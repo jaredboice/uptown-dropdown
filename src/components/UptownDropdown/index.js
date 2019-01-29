@@ -18,12 +18,12 @@ const BODY = 'body';
 const DROPDOWN = 'dropdown';
 const EXPANDER = 'expander'; // eslint-disable-line no-unused-vars
 
-const ANIME = '__uptown-anime';
-const NO_ANIME = '__uptown-no-anime';
-const CALCULATED_DIMENSION_ANIME = '__uptown-calculated-dimension-anime';
-const NON_CALCULATED_DIMENSION_ANIME = '__uptown-non-calculated-dimension-anime';
-const MAINTAIN_OPACITY = '__uptown-maintain-opacity';
-const FADE_OPACITY = '__uptown-fade-opacity';
+const ANIME = 'uptown-anime';
+const NO_ANIME = 'uptown-no-anime';
+const CALCULATED_DIMENSION_ANIME = 'uptown-calculated-dimension-anime';
+const NON_CALCULATED_DIMENSION_ANIME = 'uptown-non-calculated-dimension-anime';
+const MAINTAIN_OPACITY = 'uptown-maintain-opacity';
+const FADE_OPACITY = 'uptown-fade-opacity';
 
 const VERTICAL = 'vertical';
 const VERTICAL_REVERSE = 'vertical-reverse';
@@ -415,14 +415,14 @@ class UptownDropdown extends React.Component {
                 };
             }
         }
-        const disabledStateClass = disabled ? '__uptown-disabled' : '__uptown-enabled';
+        const disabledStateClass = disabled ? 'uptown-disabled' : 'uptown-enabled';
         const headerExpandedStateClass = expanded
-            ? `__uptown-${componentType}-header-on-expand`
-            : `__uptown-${componentType}-header-on-collapse`;
+            ? `uptown-${componentType}-header-on-expand`
+            : `uptown-${componentType}-header-on-collapse`;
         // build the body styles
         const bodyExpandedStateClass = expanded
-            ? `__uptown-${componentType}-expand`
-            : `__uptown-${componentType}-collapse`;
+            ? `uptown-${componentType}-expand`
+            : `uptown-${componentType}-collapse`;
 
         let animeStateClass;
         if (!anime) {
@@ -474,7 +474,7 @@ class UptownDropdown extends React.Component {
         }
         // class list integration
         const headerClassList = `${disabledStateClass} ${headerExpandedStateClass}`;
-        const bodyClassList = `__uptown-${componentType}-body ${bodyExpandedStateClass} ${animeStateClass}`;
+        const bodyClassList = `uptown-${componentType}-body ${bodyExpandedStateClass} ${animeStateClass}`;
         // onFocus and onBlur events must accompany onMouseOver and onMouseOut events for accessibility
         const headerAttributes = {
             onClick: () => {
@@ -550,11 +550,11 @@ class UptownDropdown extends React.Component {
                 {(orientation === VERTICAL_REVERSE || orientation === HORIZONTAL_REVERSE) &&
                     this.renderBody(bodyClassList, bodyInlineStyles, triggerType, BodyComp, bodyCompProps)}
                 <header {...headerAttributes}>
-                    <span className={`__uptown-${componentType}-placeholder`} style={{ ...placeholderInlineStyles }}>
+                    <span className={`uptown-${componentType}-placeholder`} style={{ ...placeholderInlineStyles }}>
                         {HeaderComp != null && <HeaderComp {...headerComponentProps} />}
                         {HeaderComp == null && placeholder}
                     </span>
-                    <span className={`__uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
+                    <span className={`uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
                         {IconComp && <IconComp {...iconComponentProps} />}
                     </span>
                 </header>

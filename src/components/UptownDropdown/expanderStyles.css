@@ -13,11 +13,11 @@ section.uptown-expander-container header {
     display: flex;
 }
 
-section.uptown-expander-container header span.__uptown-expander-placeholder {
+section.uptown-expander-container header span.uptown-expander-placeholder {
     flex: 1 1;
 }
 
-section.uptown-expander-container header span.__uptown-expander-icon {
+section.uptown-expander-container header span.uptown-expander-icon {
     align-self: flex-end;
     align-content: right;
 }
@@ -26,90 +26,90 @@ section.uptown-expander-container header span.__uptown-expander-icon {
 
 /* orientation: vertical */
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-body {
+section.uptown-expander-container.uptown-orientation-vertical .uptown-expander-body {
     overflow: hidden;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-vertical .uptown-expander-expand.uptown-anime {
     transform-origin: center top;
     transition: all 0.20s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-vertical .uptown-expander-collapse.uptown-anime {
     transform-origin: center top;
     transition: all 0.20s ease-out;
 }
 
 /* orientation: vertical-reverse */
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-body {
+section.uptown-expander-container.uptown-orientation-vertical-reverse .uptown-expander-body {
     overflow: hidden;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-vertical-reverse .uptown-expander-expand.uptown-anime {
     transform-origin: center bottom;
     transition: all 0.20s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-vertical-reverse .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-vertical-reverse .uptown-expander-collapse.uptown-anime {
     transform-origin: center bottom;
     transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal */
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-body {
+section.uptown-expander-container.uptown-orientation-horizontal .uptown-expander-body {
     overflow: hidden;
     white-space: nowrap;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-horizontal .uptown-expander-expand.uptown-anime {
     transform-origin: left center;
     transition: all 0.20s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-horizontal .uptown-expander-collapse.uptown-anime {
     transform-origin: left center;
     transition: all 0.20s ease-out;
 }
 
 /* orientation: horizontal-reverse */
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-body {
+section.uptown-expander-container.uptown-orientation-horizontal-reverse .uptown-expander-body {
     overflow: hidden;
     white-space: nowrap;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-expand.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-horizontal-reverse .uptown-expander-expand.uptown-anime {
     transform-origin: right center;
     transition: all 0.20s ease-out;
 }
 
-section.uptown-expander-container.uptown-orientation-horizontal-reverse .__uptown-expander-collapse.__uptown-anime {
+section.uptown-expander-container.uptown-orientation-horizontal-reverse .uptown-expander-collapse.uptown-anime {
     transform-origin: right center;
     transition: all 0.20s ease-out;
 }
 
-section .__uptown-expander-expand.__uptown-anime.__uptown-fade-opacity {
+section .uptown-expander-expand.uptown-anime.uptown-fade-opacity {
     opacity: 1;
 }
 
-section .__uptown-expander-collapse.__uptown-anime.__uptown-fade-opacity {
+section .uptown-expander-collapse.uptown-anime.uptown-fade-opacity {
     opacity: 0;
 }
 
-section .__uptown-expander-expand.__uptown-anime.__uptown-maintain-opacity {
+section .uptown-expander-expand.uptown-anime.uptown-maintain-opacity {
     opacity: 1;
 }
 
-section .__uptown-expander-collapse.__uptown-anime.__uptown-maintain-opacity {
+section .uptown-expander-collapse.uptown-anime.uptown-maintain-opacity {
     opacity: 1;
 }
 
 /* no anime */
 
-section.uptown-expander-container .__uptown-expander-expand.__uptown-no-anime {
+section.uptown-expander-container .uptown-expander-expand.uptown-no-anime {
     display: flex;
 }
 
-section.uptown-expander-container .__uptown-expander-collapse.__uptown-no-anime {
+section.uptown-expander-container .uptown-expander-collapse.uptown-no-anime {
     display: none;
 }

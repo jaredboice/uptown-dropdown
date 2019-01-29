@@ -118,7 +118,7 @@ UptownDropdown.propTypes = {
     centerPlaceholder: PropTypes.bool, // center aligns the placeholder text
     linkStyles: PropTypes.bool, // applies link-appropriate styles to the header: eg. { cursor: 'pointer', userSelect: 'none'}
     customController: PropTypes.bool, // disables click events, allowing you to use your own custom click events; triggerType still applies but surrenders click events to your custom controller
-    anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || '__uptown-anime') || (false || '__uptown-no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
+    anime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // (true || 'uptown-anime') || (false || 'uptown-no-anime') || 'any-custom-css-class' (css class will be dynamically applied)
     orientation: PropTypes.string, // 'vertical' || 'vertical-reverse' || 'horizontal' || 'horizontal-reverse'
     calculateDimension: PropTypes.bool, // when true (and when anime has a truthy/custom value), uptown-dropdown will calculate and apply the body max-height/max-width (vertical/horizontal) when expanded and apply 0 on collapse
     maintainOpacityOnAnime: PropTypes.bool, // when false, opacity will fade on collapse - when true, opacity will not fade on collapse
