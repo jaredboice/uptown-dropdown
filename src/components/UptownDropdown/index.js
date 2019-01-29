@@ -554,9 +554,11 @@ class UptownDropdown extends React.Component {
                         {HeaderComp != null && <HeaderComp {...headerComponentProps} />}
                         {HeaderComp == null && placeholder}
                     </span>
-                    <span className={`uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
-                        {IconComp && <IconComp {...iconComponentProps} />}
-                    </span>
+                    {IconComp && (
+                        <span className={`uptown-${componentType}-icon`} style={{ ...iconInlineStyles }}>
+                            <IconComp {...iconComponentProps} />
+                        </span>
+                    )}
                 </header>
                 {(orientation === VERTICAL || orientation === HORIZONTAL) &&
                     this.renderBody(bodyClassList, bodyInlineStyles, triggerType, BodyComp, bodyCompProps)}
