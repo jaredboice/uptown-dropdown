@@ -191,8 +191,8 @@ UptownDropdown.defaultProps = {
 
 **disabledStateClass** _applied on the header_
 
-*   '\_\_uptown-disabled'
-*   '\_\_uptown-enabled'
+*   'uptown-disabled'
+*   'uptown-enabled'
 
 \*\*headerExpandedStateClass
 
@@ -206,8 +206,8 @@ UptownDropdown.defaultProps = {
 
 **animeStateClass** _(applied on the body)_
 
-*   '\_\_uptown-anime'
-*   '\_\_uptown-no-anime'
+*   'uptown-anime'
+*   'uptown-no-anime'
 *   'any-custom-class-name'
 
 **class list integration**
