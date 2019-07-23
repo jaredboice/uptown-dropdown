@@ -4,7 +4,10 @@
 
 get the [full documentation](https://github.com/jaredboice/uptown-dropdown) at gitHub.
 
-## Donations - Bitcoin: 19XgiRojJnv9VDhyW9HmF6oKQeVc7k9McU (use this address until 2020)
+![List-Runner](screenshots/uptown-dropdown-logo.png 'uptown-dropdown')
+
+## Donations - Bitcoin: 19XgiRojJnv9VDhyW9HmF6oKQeVc7k9McU 
+(use this address until 2022)
 
 ## Description
 
